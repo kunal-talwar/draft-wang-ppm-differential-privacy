@@ -160,13 +160,13 @@ Table of Contents
    then a high degree of privacy can be achieved with minimal loss in
    utility; but if the trust model includes the possibility that many
    Clients are corrupted by the attacker, then the same degree of
-   privacy can only be achieved at the cost of higher utility.
+   privacy can only be achieved at the cost of decreased utility.
 
    The primary goal of this document is to specify how DP policies are
    implemented in DAP.  It does so in the following stages:
 
    1.  Section 3 describes the notion(s) of DP that are compatible with
-       DAP and the trust model(s) in which we hope to achieve them.  It
+       DAP and the trust models in which we hope to achieve them.  It
        also provides a systematization of applicable DP policies from
        the literature.
 
@@ -237,7 +237,7 @@ Table of Contents
    Let p(S, D, R) denote the probability that randomized algorithm S, on
    input of measurements D, outputs aggregate result R.
 
-   A randomized algorithm R is called "EPSILON-DP" if for all
+   A randomized algorithm S is called "EPSILON-DP" if for all
    neighboring D1 and D2 and all possible aggregate results S, the
    following inequality holds:
 
@@ -254,7 +254,7 @@ Table of Contents
    difference between p(S, D1, R) and p(S, D2, R) is negligible.
    However, this requires adding more noise, which has an adverse impact
    on utility.  Most applications will accept a non-negligible bound in
-   order achieve reasonable utility.  See Appendix B for details.
+   order to achieve reasonable utility.  See Appendix B for details.
 
    This notion of EPSILON-DP is sometimes referred to as "pure-DP".  The
    following is a relaxation of pure-DP, called "approximate-DP", from
@@ -291,13 +291,13 @@ Table of Contents
 
    We say the protocol is pure-DP (resp. approximate-DP) if the view of
    any computationally bounded attacker can be efficiently simulated by
-   a simulator S that itself is pure-DP (i.e., apprixmate-DP) as defined
-   above.  (S takes the measurements as input and outputs a value that
-   is computationally indistinguishable from the transcript of the
-   protocol's execution in the presence of the attacker.)
+   a simulator that itself is pure-DP (or approximate-DP) as defined
+   above.  (The simulator takes the measurements as input and outputs a
+   value that is computationally indistinguishable from the transcript
+   of the protocol's execution in the presence of the attacker.)
 
    Whether this property holds for a given DP policy depends on which
-   parties can be trusted to execute the prtocol correctly (i.e., which
+   parties can be trusted to execute the protocol correctly (i.e., which
    parties were not corrupted by the attacker).  The DP policies
    described in this document are secure in one of two trust models
    described below.
@@ -333,7 +333,7 @@ Table of Contents
    bound we aim to achieve is much looser than usual.  For example, if
    the parameters of a DP policy are tuned for OAMC security, but both
    Aggregators are corrupted by the attacker, then the noise added by
-   the Client may not be sufficient to protect the measurement.  Howver
+   the Client may not be sufficient to protect the measurement.  However
    this is the best possible case in such a stringent threat model.
 
 4.  DP Mechanisms

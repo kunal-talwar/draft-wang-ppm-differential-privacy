@@ -1320,15 +1320,15 @@ noise is added only by the Clients or only by the Aggregators, but for others,
 noise might be added by both Clients and Aggregators. The best choice of policy
 depends one's "trust model": if most Clients can be trusted to noise their
 measurements correctly, then a high degree of privacy can be achieved with
-minimal loss in utility; but if the trust model includes the possibility that many Clients are corrupted by the attacker,
-then the same degree of privacy can only be achieved at the cost of higher
-utility.<a href="#section-1-6" class="pilcrow">¶</a></p>
+minimal loss in utility; but if the trust model includes the possibility that
+many Clients are corrupted by the attacker, then the same degree of privacy can
+only be achieved at the cost of decreased utility.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The primary goal of this document is to specify how DP policies are implemented
 in DAP. It does so in the following stages:<a href="#section-1-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-8">
 <li id="section-1-8.1">
           <a href="#overview" class="auto internal xref">Section 3</a> describes the notion(s) of DP that are compatible with DAP and
-the trust model(s) in which we hope to achieve them. It also provides a
+the trust models in which we hope to achieve them. It also provides a
 systematization of applicable DP policies from the literature.<a href="#section-1-8.1" class="pilcrow">¶</a>
 </li>
         <li id="section-1-8.2">
@@ -1410,7 +1410,7 @@ the same length and contain all the same measurements except one (i.e., the
 difference between their multisets contains one element).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">Let <code>p(S, D, R)</code> denote the probability that randomized algorithm <code>S</code>, on input
 of measurements <code>D</code>, outputs aggregate result <code>R</code>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">A randomized algorithm <code>R</code> is called "<code>EPSILON</code>-DP" if for all neighboring <code>D1</code>
+<p id="section-3.1-5">A randomized algorithm <code>S</code> is called "<code>EPSILON</code>-DP" if for all neighboring <code>D1</code>
 and <code>D2</code> and all possible aggregate results <code>S</code>, the following inequality
 holds:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-6">
@@ -1426,8 +1426,8 @@ less information is leaked by <code>S</code>. For many DP mechanisms, it is poss
 make <code>EPSILON</code> so close to <code>0</code> that the difference between <code>p(S, D1, R)</code> and
 <code>p(S, D2, R)</code> is negligible. However, this requires adding more noise, which
 has an adverse impact on utility. Most applications will accept a
-non-negligible bound in order achieve reasonable utility. See <a href="#dp-explainer" class="auto internal xref">Appendix B</a>
-for details.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+non-negligible bound in order to achieve reasonable utility. See
+<a href="#dp-explainer" class="auto internal xref">Appendix B</a> for details.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.1-9">This notion of <code>EPSILON</code>-DP is sometimes referred to as "pure-DP". The
 following is a relaxation of pure-DP, called "approximate-DP", from <span>[<a href="#DR14" class="cite xref">DR14</a>]</span>. A
 randomized algorithm <code>R</code> is called "<code>(EPSILON, DELTA)</code>-DP" if for all
@@ -1464,12 +1464,12 @@ protocol. We consider an attacker that controls the network and statically
 corrupts a subset of the parties.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">We say the protocol is pure-DP (resp. approximate-DP) if the view of any
 computationally bounded attacker can be efficiently simulated by a simulator
-<code>S</code> that itself is pure-DP (i.e., apprixmate-DP) as defined above. (<code>S</code> takes
-the measurements as input and outputs a value that is computationally
+that itself is pure-DP (or approximate-DP) as defined above. (The simulator
+takes the measurements as input and outputs a value that is computationally
 indistinguishable from the transcript of the protocol's execution in the
 presence of the attacker.)<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Whether this property holds for a given DP policy depends on which parties can
-be trusted to execute the prtocol correctly (i.e., which parties were not
+be trusted to execute the protocol correctly (i.e., which parties were not
 corrupted by the attacker). The DP policies described in this document are
 secure in one of two trust models described below.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <div id="oamc-one-aggregator-most-clients">
@@ -1513,7 +1513,7 @@ Clients' measurements have "local-DP". This property is defined the same way as
 pure- or approximate-DP, except that the bound we aim to achieve is much looser
 than usual. For example, if the parameters of a DP policy are tuned for OAMC
 security, but both Aggregators are corrupted by the attacker, then the noise
-added by the Client may not be sufficient to protect the measurement. Howver
+added by the Client may not be sufficient to protect the measurement. However
 this is the best possible case in such a stringent threat model.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
