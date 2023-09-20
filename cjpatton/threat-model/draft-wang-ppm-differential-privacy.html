@@ -1053,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wang</td>
-<td class="center">Expires 22 March 2024</td>
+<td class="center">Expires 23 March 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-19" class="published">19 September 2023</time>
+<time datetime="2023-09-20" class="published">20 September 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-22">22 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-03-23">23 March 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1235,7 +1235,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-overview-of-differential-pr" class="internal xref">Overview of Differential Privacy</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-differential-privacy-models" class="internal xref">Differential privacy models</a></p>
+                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-how-to-define-neighboring-b" class="internal xref">How to define neighboring batches</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
                 <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-differential-privacy-levels" class="internal xref">Differential privacy levels</a></p>
@@ -1404,10 +1404,9 @@ consensus among ourselves, we can punt this to the appendix and leave a less
 formal description here.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-3">[CP: This is substitution+pure-DP: Is <span>[<a href="#DMNS06" class="cite xref">DMNS06</a>]</span> the right reference?] We say
-that two sequences of measurements <code>D1</code> and <code>D2</code> are "neighboring" if they are
-the same length and contain all the same measurements except one (i.e., the
-difference between their multisets contains one element).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">We say that two batches of measurements <code>D1</code> and <code>D2</code> are "neighboring" if they
+are the same length and contain all the same measurements except one (i.e., the
+symmetric difference between the multisets contains two elements).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">Let <code>p(S, D, R)</code> denote the probability that randomized algorithm <code>S</code>, on input
 of measurements <code>D</code>, outputs aggregate result <code>R</code>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">A randomized algorithm <code>S</code> is called "<code>EPSILON</code>-DP" if for all neighboring <code>D1</code>
@@ -1458,10 +1457,10 @@ aggregation, and collection protocols and may use its resources to attack the
 underlying primitives (VDAF <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>, HPKE <span>[<a href="#RFC9180" class="cite xref">RFC9180</a>]</span>, and the transport
 security protocol).<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">To account for such attackers, our goal for DAP is "computational-DP" as
-described by <span>[<a href="#MPRV09" class="cite xref">MPRV09</a>]</span>, which formalizes the amount of information an active
-attacker can glean about the measurements over the course of its attack on the
-protocol. We consider an attacker that controls the network and statically
-corrupts a subset of the parties.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+described by <span>[<a href="#MPRV09" class="cite xref">MPRV09</a>]</span> (Definition 4, "SIM-CDP"), which formalizes the amount
+of information an active attacker can glean about the measurements over the
+course of its attack on the protocol. We consider an attacker that controls the
+network and statically corrupts a subset of the parties.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">We say the protocol is pure-DP (resp. approximate-DP) if the view of any
 computationally bounded attacker can be efficiently simulated by a simulator
 that itself is pure-DP (or approximate-DP) as defined above. (The simulator
@@ -1488,7 +1487,7 @@ honest Clients decreases.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
           <h4 id="name-oa-one-aggregator">
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-oa-one-aggregator" class="section-name selfRef">OA: One-Aggregator</a>
           </h4>
-<p id="section-3.2.2-1">Assume that at least one Aggregator is honest. The other Aggregator(s), the
+<p id="section-3.2.2-1">Assume that at least one Aggregator is honest. The other Aggregator, the
 Collector, and most Clients are controlled by the attacker.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.2.2-2.1">
@@ -1934,6 +1933,10 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
         <dd>
 <span class="refAuthor">Feldman, V.</span>, <span class="refAuthor">McMillan, A.</span>, and <span class="refAuthor">K. Talwar</span>, <span class="refTitle">"Stronger Privacy Amplification by Shuffling for Rényi and Approximate Differential Privacy"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://arxiv.org/abs/2208.04591">https://arxiv.org/abs/2208.04591</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="KM11">[KM11]</dt>
+        <dd>
+<span class="refAuthor">Kifer, D.</span> and <span class="refAuthor">A. Machanavajjhala</span>, <span class="refTitle">"No free lunch in data privacy"</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="https://dl.acm.org/doi/abs/10.1145/1989323.1989345">https://dl.acm.org/doi/abs/10.1145/1989323.1989345</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="KOV15">[KOV15]</dt>
         <dd>
 <span class="refAuthor">Kairouz, P.</span>, <span class="refAuthor">Oh, S.</span>, and <span class="refAuthor">P. Viswanath</span>, <span class="refTitle">"The Composition Theorem for Differential Privacy"</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="http://proceedings.mlr.press/v37/kairouz15.pdf">http://proceedings.mlr.press/v37/kairouz15.pdf</a>&gt;</span>. </dd>
@@ -1976,28 +1979,16 @@ provides a strong, quantifiable and composable privacy guarantee. The main idea
 of differential privacy is to add carefully calibrated noise to the results,
 which makes it difficult to determine with high certainty whether a specific
 individual's data was included in the results or not.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="differential-privacy-models">
+<div id="how-to-define-neighboring-batches">
 <section id="appendix-B.1">
-        <h3 id="name-differential-privacy-models">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-differential-privacy-models" class="section-name selfRef">Differential privacy models</a>
+        <h3 id="name-how-to-define-neighboring-b">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-how-to-define-neighboring-b" class="section-name selfRef">How to define neighboring batches</a>
         </h3>
-<p id="appendix-B.1-1">There are two model of differential privacy: deletion differential privacy (
-deletion dp) and replacement differntial privacy (replacement dp).<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-B.1-2.1">
-            <p id="appendix-B.1-2.1.1">OPEN ISSUE: or call it substitution dp.<a href="#appendix-B.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="appendix-B.1-3">For two dataset X and Y that differ only by 1 data point. Then the difference
-between the two are:
-* Replacement DP: Y differs from X by replacing a data point in X.
-* Deletion DP: Y differs from X by removing a data point in X.<a href="#appendix-B.1-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-B.1-4.1">
-            <p id="appendix-B.1-4.1.1">TODO: make the definition more accurate
-TODO: talk about the relationship of the two<a href="#appendix-B.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="appendix-B.1-1">There are primarily two ways of in the literature for defining "neighboring
+batches": deletion (or addition) of one measurement and substitution of one
+measurement with another <span>[<a href="#KM11" class="cite xref">KM11</a>]</span>. Only the latter ("substitution DP") applies
+to DAP, as the protocol leaks the number of measurements in each batch
+collected.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="levels">

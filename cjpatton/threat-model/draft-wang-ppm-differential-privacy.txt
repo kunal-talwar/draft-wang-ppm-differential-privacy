@@ -4,8 +4,8 @@
 
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
-Intended status: Informational                         19 September 2023
-Expires: 22 March 2024
+Intended status: Informational                         20 September 2023
+Expires: 23 March 2024
 
 
                 Differential Privacy Mechanisms for DAP
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2024.
+   This Internet-Draft will expire on 23 March 2024.
 
 Copyright Notice
 
@@ -91,7 +91,7 @@ Table of Contents
      9.2.  Informative References
    Appendix A.  Contributors
    Appendix B.  Overview of Differential Privacy
-     B.1.  Differential privacy models
+     B.1.  How to define neighboring batches
      B.2.  Differential privacy levels
      B.3.  Protected entity
      B.4.  Privacy budget and accounting
@@ -228,11 +228,10 @@ Table of Contents
       definition.  Once we have consensus among ourselves, we can punt
       this to the appendix and leave a less formal description here.
 
-   [CP: This is substitution+pure-DP: Is [DMNS06] the right reference?]
-   We say that two sequences of measurements D1 and D2 are "neighboring"
+   We say that two batches of measurements D1 and D2 are "neighboring"
    if they are the same length and contain all the same measurements
-   except one (i.e., the difference between their multisets contains one
-   element).
+   except one (i.e., the symmetric difference between the multisets
+   contains two elements).
 
    Let p(S, D, R) denote the probability that randomized algorithm S, on
    input of measurements D, outputs aggregate result R.
@@ -284,10 +283,11 @@ Table of Contents
    protocol).
 
    To account for such attackers, our goal for DAP is "computational-DP"
-   as described by [MPRV09], which formalizes the amount of information
-   an active attacker can glean about the measurements over the course
-   of its attack on the protocol.  We consider an attacker that controls
-   the network and statically corrupts a subset of the parties.
+   as described by [MPRV09] (Definition 4, "SIM-CDP"), which formalizes
+   the amount of information an active attacker can glean about the
+   measurements over the course of its attack on the protocol.  We
+   consider an attacker that controls the network and statically
+   corrupts a subset of the parties.
 
    We say the protocol is pure-DP (resp. approximate-DP) if the view of
    any computationally bounded attacker can be efficiently simulated by
@@ -311,9 +311,8 @@ Table of Contents
 
 3.2.2.  OA: One-Aggregator
 
-   Assume that at least one Aggregator is honest.  The other
-   Aggregator(s), the Collector, and most Clients are controlled by the
-   attacker.
+   Assume that at least one Aggregator is honest.  The other Aggregator,
+   the Collector, and most Clients are controlled by the attacker.
 
       TODO(issue#15) For the simple Aggregator-noise mechanism, if the
       malicious Aggregator cheats by not adding noise, then the
@@ -681,6 +680,10 @@ Table of Contents
               Approximate Differential Privacy", 2022,
               <https://arxiv.org/abs/2208.04591>.
 
+   [KM11]     Kifer, D. and A. Machanavajjhala, "No free lunch in data
+              privacy", 2011,
+              <https://dl.acm.org/doi/abs/10.1145/1989323.1989345>.
+
    [KOV15]    Kairouz, P., Oh, S., and P. Viswanath, "The Composition
               Theorem for Differential Privacy", 2015,
               <http://proceedings.mlr.press/v37/kairouz15.pdf>.
@@ -718,21 +721,13 @@ Appendix B.  Overview of Differential Privacy
    whether a specific individual's data was included in the results or
    not.
 
-B.1.  Differential privacy models
+B.1.  How to define neighboring batches
 
-   There are two model of differential privacy: deletion differential
-   privacy ( deletion dp) and replacement differntial privacy
-   (replacement dp).
-
-      OPEN ISSUE: or call it substitution dp.
-
-   For two dataset X and Y that differ only by 1 data point.  Then the
-   difference between the two are: * Replacement DP: Y differs from X by
-   replacing a data point in X. * Deletion DP: Y differs from X by
-   removing a data point in X.
-
-      TODO: make the definition more accurate TODO: talk about the
-      relationship of the two
+   There are primarily two ways of in the literature for defining
+   "neighboring batches": deletion (or addition) of one measurement and
+   substitution of one measurement with another [KM11].  Only the latter
+   ("substitution DP") applies to DAP, as the protocol leaks the number
+   of measurements in each batch collected.
 
 B.2.  Differential privacy levels
 
