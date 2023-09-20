@@ -154,21 +154,20 @@ Table of Contents
    In this document, we shall refer to the composition of DP mechanisms
    into a scheme that provides (some notion of) DP as a "DP policy".
    For some policies, noise is added only by the Clients or only by the
-   Aggregators, but for others, noise might be added by both Clients and
-   Aggregators.  The best choice of policy depends one's "trust model":
-   if most Clients can be trusted to noise their measurements correctly,
-   then a high degree of privacy can be achieved with minimal loss in
-   utility; but if the trust model includes the possibility that many
-   Clients are corrupted by the attacker, then the same degree of
-   privacy can only be achieved at the cost of decreased utility.
+   Aggregators, but for others, both Clients and Aggregators may
+   participate in generating the noise.
 
    The primary goal of this document is to specify how DP policies are
    implemented in DAP.  It does so in the following stages:
 
    1.  Section 3 describes the notion(s) of DP that are compatible with
-       DAP and the trust models in which we hope to achieve them.  It
-       also provides a systematization of applicable DP policies from
-       the literature.
+       DAP and provides a systematization of applicable DP policies from
+       the literature.  Security is defined in a few different "trust
+       models" in which we assume that some fraction of the parties
+       execute the protocol honestly.  Of course in reality, whether
+       such assumptions hold is usually outside of our control.  Thus
+       our goal is to design DP policies that still provide some degree
+       of protection in more pessimistic trust models.
 
    2.  Section 4 specifies various mechanisms required for building DP
        systems, including algorithms for sampling from discrete Laplace

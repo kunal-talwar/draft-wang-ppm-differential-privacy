@@ -1317,19 +1317,18 @@ values they produce for the Collector).<a href="#section-1-5" class="pilcrow">¶
 <p id="section-1-6">In this document, we shall refer to the composition of DP mechanisms into a
 scheme that provides (some notion of) DP as a "DP policy". For some policies,
 noise is added only by the Clients or only by the Aggregators, but for others,
-noise might be added by both Clients and Aggregators. The best choice of policy
-depends one's "trust model": if most Clients can be trusted to noise their
-measurements correctly, then a high degree of privacy can be achieved with
-minimal loss in utility; but if the trust model includes the possibility that
-many Clients are corrupted by the attacker, then the same degree of privacy can
-only be achieved at the cost of decreased utility.<a href="#section-1-6" class="pilcrow">¶</a></p>
+both Clients and Aggregators may participate in generating the noise.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The primary goal of this document is to specify how DP policies are implemented
 in DAP. It does so in the following stages:<a href="#section-1-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-8">
 <li id="section-1-8.1">
           <a href="#overview" class="auto internal xref">Section 3</a> describes the notion(s) of DP that are compatible with DAP and
-the trust models in which we hope to achieve them. It also provides a
-systematization of applicable DP policies from the literature.<a href="#section-1-8.1" class="pilcrow">¶</a>
+provides a systematization of applicable DP policies from the literature.
+Security is defined in a few different "trust models" in which we assume
+that some fraction of the parties execute the protocol honestly. Of course
+in reality, whether such assumptions hold is usually outside of our control.
+Thus our goal is to design DP policies that still provide some degree of
+protection in more pessimistic trust models.<a href="#section-1-8.1" class="pilcrow">¶</a>
 </li>
         <li id="section-1-8.2">
           <a href="#mechanisms" class="auto internal xref">Section 4</a> specifies various mechanisms required for building DP
