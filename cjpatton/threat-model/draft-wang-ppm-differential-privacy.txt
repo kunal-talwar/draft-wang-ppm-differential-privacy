@@ -304,7 +304,7 @@ Table of Contents
 3.2.1.  OAMC: One-Aggregator-most-Clients
 
    Assume that most Clients and one Aggregator is honest and that the
-   other Aggregator and the Collector are controlled by the atacker.
+   other Aggregator and the Collector are controlled by the attacker.
    This corresponds to the same trust model as the base DAP procotol.
    Ideally, the degree of privacy provided (i.e., the value of EPSILON
    for pure-DP) degrades gracefully as the number of honest Clients
