@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-09-19T00:52:21.714011+00:00",
+  "timestamp": "2023-09-21T00:51:38.430908+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -199,6 +199,22 @@
           "updatedAt": "2023-07-21T16:12:28Z"
         }
       ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOJ7sZWc5xktfg",
+      "title": "Use a unicode character for greek letters (e.g., \u0511 instead of `EPSILON`)",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/issues/18",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "              Did you know that you can do this now:\r\n\r\n```suggestion\r\nLet `exp(\u03b5)` denote raising the numeric constant `e` to the power of\r\n```\r\n\r\nOf course, whether you want to or not is something you will need to decide.\r\n\r\n_Originally posted by @martinthomson in https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/17#discussion_r1329403113_\r\n            ",
+      "createdAt": "2023-09-20T17:37:36Z",
+      "updatedAt": "2023-09-20T17:37:36Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2167,15 +2183,15 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Whoops, re-do of #16. I merged an intermediate commit, which seems to have confused GitHub.\r\nCloses #15 by doing nothing.",
+      "body": "Whoops, re-do of #16. I merged an intermediate commit, which seems to have confused GitHub.\r\n",
       "createdAt": "2023-09-18T23:28:20Z",
-      "updatedAt": "2023-09-19T00:48:32Z",
+      "updatedAt": "2023-09-20T23:37:03Z",
       "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "baseRefName": "main",
       "baseRefOid": "6bfffda2f2961a058ae5270f6bd570610d216480",
       "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "headRefName": "cjpatton/threat-model",
-      "headRefOid": "0b75391d384cbd7f718bf0ac25df680a0dd11109",
+      "headRefOid": "fd02abbc84d1df0a15c58603e02d7d2f8e7745ef",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2377,6 +2393,540 @@
               "body": "FWIW, my local testing doesn't produce that bug.  I had no trouble getting an epsilon to show, either by pasting the character directly in the document source or by using an entity reference.",
               "createdAt": "2023-09-19T00:48:31Z",
               "updatedAt": "2023-09-19T00:48:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUbRw",
+          "commit": {
+            "abbreviatedOid": "2e63432"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T08:48:50Z",
+          "updatedAt": "2023-09-19T08:48:50Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "https://en.wikipedia.org/wiki/Scare_quotes\r\n\r\nThere seems to be no reason for quotes here.\r\nAnd there is an \"on\" missing: `The best choice of policy depends *on* one's trust model`",
+              "createdAt": "2023-09-19T08:48:50Z",
+              "updatedAt": "2023-09-19T09:05:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUjzo",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T09:03:47Z",
+          "updatedAt": "2023-09-19T09:03:48Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "nit: \"at the cost of some utility\" because \"higher\" is weird here since the utility is getting lower.",
+              "createdAt": "2023-09-19T09:03:47Z",
+              "updatedAt": "2023-09-19T09:03:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUkbV",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T09:05:11Z",
+          "updatedAt": "2023-09-19T09:05:11Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "nit: Just say \"trustmodels\" the distinction doesn't matter here",
+              "createdAt": "2023-09-19T09:05:11Z",
+              "updatedAt": "2023-09-19T09:05:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUniG",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T09:12:04Z",
+          "updatedAt": "2023-09-19T09:12:04Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "R and S are mixed up. Above it says S is the algorithm and R the aggregate, now this changes.",
+              "createdAt": "2023-09-19T09:12:04Z",
+              "updatedAt": "2023-09-19T09:17:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUtFZ",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T09:24:16Z",
+          "updatedAt": "2023-09-19T09:24:16Z",
+          "comments": [
+            {
+              "originalPosition": 152,
+              "body": "nit: It's better to drop the parentheses the explanation is totally justified here. And maybe pick something other than `S` because that was already used above. If it's not used further it could just be omitted.",
+              "createdAt": "2023-09-19T09:24:16Z",
+              "updatedAt": "2023-09-19T09:24:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hUxCu",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "simon-friedberger",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T09:33:05Z",
+          "updatedAt": "2023-09-19T09:33:05Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "I think `One-Aggregator` is strictly more powerful and aligns better with the fact that there is no requirement in DAP to keep aggregates secret.\r\n\r\nI agree with the statements in issue #15 that assuming one aggregator doesn't add noise and the other one removes their own noise is actually two malicious aggregators and violates assumptions.",
+              "createdAt": "2023-09-19T09:33:05Z",
+              "updatedAt": "2023-09-19T09:33:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hT6m5",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T07:37:44Z",
+          "updatedAt": "2023-09-19T12:12:53Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "nit: wrap at 80 columns.",
+              "createdAt": "2023-09-19T07:37:44Z",
+              "updatedAt": "2023-09-19T12:12:53Z"
+            },
+            {
+              "originalPosition": 152,
+              "body": "```suggestion\r\n`S` that itself is pure-DP (or, approximate-DP) as defined above. (`S` takes\r\n```",
+              "createdAt": "2023-09-19T07:52:34Z",
+              "updatedAt": "2023-09-19T12:12:53Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\nbe trusted to execute the protocol correctly (i.e., which parties were not\r\n```",
+              "createdAt": "2023-09-19T07:53:34Z",
+              "updatedAt": "2023-09-19T12:12:53Z"
+            },
+            {
+              "originalPosition": 191,
+              "body": "```suggestion\r\nadded by the Client may not be sufficient to protect the measurement. However\r\n```",
+              "createdAt": "2023-09-19T07:56:28Z",
+              "updatedAt": "2023-09-19T12:12:53Z"
+            },
+            {
+              "originalPosition": 113,
+              "body": "```suggestion\r\nnon-negligible bound in order to achieve reasonable utility. See {{dp-explainer}}\r\n```",
+              "createdAt": "2023-09-19T12:11:01Z",
+              "updatedAt": "2023-09-19T12:12:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5haTdX",
+          "commit": {
+            "abbreviatedOid": "2e63432"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:19:46Z",
+          "updatedAt": "2023-09-19T22:19:47Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "I'm using quotes to emphasize a term I'm defining. If this were latex, I'd use `\\emph{}`. Markdown italics can't be used in RFCs as far as I know.",
+              "createdAt": "2023-09-19T22:19:47Z",
+              "updatedAt": "2023-09-19T22:19:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5haTlq",
+          "commit": {
+            "abbreviatedOid": "2e63432"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:20:26Z",
+          "updatedAt": "2023-09-19T22:20:26Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "Ack, I'll do some research at some point. Possibly I have an old version.",
+              "createdAt": "2023-09-19T22:20:26Z",
+              "updatedAt": "2023-09-19T22:20:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5haUzr",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:21:42Z",
+          "updatedAt": "2023-09-19T22:21:43Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Good catch, I meant \"decreased\" \ud83d\ude2c ",
+              "createdAt": "2023-09-19T22:21:42Z",
+              "updatedAt": "2023-09-19T22:21:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5haVFd",
+          "commit": {
+            "abbreviatedOid": "0b75391"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:23:04Z",
+          "updatedAt": "2023-09-19T22:23:04Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "Good catch. Previously I was using `R` for the algorithm and missed this one.",
+              "createdAt": "2023-09-19T22:23:04Z",
+              "updatedAt": "2023-09-19T22:23:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5haZuv",
+          "commit": {
+            "abbreviatedOid": "169bdf8"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:47:43Z",
+          "updatedAt": "2023-09-19T22:47:43Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "Done. I left addressing issue #15 as a TODO: It's worth mentioning in Security Considerations at least.",
+              "createdAt": "2023-09-19T22:47:43Z",
+              "updatedAt": "2023-09-19T22:47:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5habXc",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-19T22:57:22Z",
+          "updatedAt": "2023-09-19T22:57:22Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "Correct me if I'm wrong: I believe the goal of this section is to provide an overview of DP, including definitions (done in this PR), trust models (done in this PR), utility (to be filled) etc. Should the title of this section be changed to something like \"Overview\" as well? And things like utility can be added as a subsection in the overview.",
+              "createdAt": "2023-09-19T22:57:22Z",
+              "updatedAt": "2023-09-19T22:57:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hhkci",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T17:38:44Z",
+          "updatedAt": "2023-09-20T17:38:44Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "I moved things around a bit. I guess we should have reviewed this first ... I took the liberty to just push to main. The old \"DP overview\" section is now in the Appendix.",
+              "createdAt": "2023-09-20T17:38:44Z",
+              "updatedAt": "2023-09-20T17:38:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hiOsQ",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "tholop",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T19:34:01Z",
+          "updatedAt": "2023-09-20T19:56:57Z",
+          "comments": [
+            {
+              "originalPosition": 155,
+              "body": "This corresponds to the SIM-CDP definition (Def 4 from {{MPRV09}}). Other definitions exist, such as IND-CDP or SIM+-CDP, so it can be worth stating the exact definition being used once we have the formal CDP proof.",
+              "createdAt": "2023-09-20T19:34:01Z",
+              "updatedAt": "2023-09-20T19:56:57Z"
+            },
+            {
+              "originalPosition": 173,
+              "body": "Should it be \"all Clients\" instead of \"most Clients\", since we only trust one Aggregator and nobody else?",
+              "createdAt": "2023-09-20T19:38:31Z",
+              "updatedAt": "2023-09-20T19:56:57Z"
+            },
+            {
+              "originalPosition": 90,
+              "body": "Yes, {{DMNS06}} is defining Substitution + Pure DP in Def 1 (the \"databases\" have the same length). But with this definition, the *symmetric difference* between the multisets actually contains 2 elements, not one element.\r\n\r\nAnother reference that I often see to explain the difference between Substitution-DP and Addition-DP is this SIGMOD '11 paper: https://www.cse.psu.edu/~duk17/papers/nflprivacy.pdf. I think that they introduced the Bounded/Unbounded DP terminology, which is used by some papers.",
+              "createdAt": "2023-09-20T19:56:04Z",
+              "updatedAt": "2023-09-20T19:56:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjGgK",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T22:25:27Z",
+          "updatedAt": "2023-09-20T22:25:28Z",
+          "comments": [
+            {
+              "originalPosition": 171,
+              "body": "perhaps enough to just say Aggregator, without (s), as other parts of the PR does",
+              "createdAt": "2023-09-20T22:25:27Z",
+              "updatedAt": "2023-09-20T22:25:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjKlK",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T22:47:27Z",
+          "updatedAt": "2023-09-20T22:47:27Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "question: @cjpatton am I right the two trust model are type 1 and 2 from the googledoc. we don't consider the case where one aggregator and collector are honest? do we want to include this happy case?",
+              "createdAt": "2023-09-20T22:47:27Z",
+              "updatedAt": "2023-09-20T22:50:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjLSp",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T22:51:23Z",
+          "updatedAt": "2023-09-20T22:51:23Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "I think we can bring back some section from old overview once we merge this. For e.g. local-DP should be explained before it's mentioned in Hedging",
+              "createdAt": "2023-09-20T22:51:23Z",
+              "updatedAt": "2023-09-20T22:51:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjL39",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T22:54:46Z",
+          "updatedAt": "2023-09-20T22:59:03Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "Great catch! Added reference to the Appendix (and cleaned up the subsection).",
+              "createdAt": "2023-09-20T22:54:46Z",
+              "updatedAt": "2023-09-20T22:59:03Z"
+            },
+            {
+              "originalPosition": 155,
+              "body": "Added this reference.",
+              "createdAt": "2023-09-20T22:57:27Z",
+              "updatedAt": "2023-09-20T22:59:03Z"
+            },
+            {
+              "originalPosition": 171,
+              "body": "yes, good catch!",
+              "createdAt": "2023-09-20T22:57:55Z",
+              "updatedAt": "2023-09-20T22:59:03Z"
+            },
+            {
+              "originalPosition": 173,
+              "body": "@wangshan pointed out that we're considering at least one honest Client, since otherwise privacy is completely meaningless :D ",
+              "createdAt": "2023-09-20T22:58:36Z",
+              "updatedAt": "2023-09-20T22:59:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjNFK",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T23:02:02Z",
+          "updatedAt": "2023-09-20T23:02:03Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "See https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/17#discussion_r1329407535. It seems like people mostly agree that the attack #15 is basically the same as two Aggregators colluding. I'm not totally convinced myself (I wonder what happens when we try to formalize our security definition and try to prove it), but I think this is fine for now.\r\n\r\nIn any case, it's useful to settle on as few possible trust models as possible.",
+              "createdAt": "2023-09-20T23:02:02Z",
+              "updatedAt": "2023-09-20T23:02:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjNsd",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T23:05:43Z",
+          "updatedAt": "2023-09-20T23:05:43Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "To me this section indicates one must define the trust model of their deployment then choose DP policy. But in reality the trust model may not hold true all the time. It may not be possible for user to choose a trust model and that model's best policy. For e.g. one may not know how many clients are honest. In reality, user probably will choose a DP policy then analyse/explain their DP guarantee under different trust model. Maybe we can word this to something like the choice of DP policy will be affected by the trust model, etc. @cjpatton ",
+              "createdAt": "2023-09-20T23:05:43Z",
+              "updatedAt": "2023-09-20T23:05:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjNu5",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T23:05:55Z",
+          "updatedAt": "2023-09-20T23:05:55Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "That could work. I was thinking of adding a new section to Trust Models, something like this:\r\n\r\n```\r\n## NOP: No-honest-parties\r\n\r\nIf no parties are honest, then the best we can hope for is that the honest\r\nClients' measurements have \"local-DP\". This property is defined the same way as\r\npure- or approximate-DP, except that the bound that we aim to achieve is looser\r\nthan what we can get when at least one Aggregator is honest (OAMC or OA).\r\n```",
+              "createdAt": "2023-09-20T23:05:55Z",
+              "updatedAt": "2023-09-20T23:05:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjPfN",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T23:09:46Z",
+          "updatedAt": "2023-09-20T23:09:46Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "sounds good to me, maybe worth mentioning there is still at least one honest client worthy protecting for.",
+              "createdAt": "2023-09-20T23:09:46Z",
+              "updatedAt": "2023-09-20T23:09:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjV7x",
+          "commit": {
+            "abbreviatedOid": "fd02abb"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-20T23:36:42Z",
+          "updatedAt": "2023-09-20T23:36:58Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "Great idea! I pruned some of the text here and implemented your suggestion in the itemized list below, PTAL.",
+              "createdAt": "2023-09-20T23:36:43Z",
+              "updatedAt": "2023-09-20T23:36:58Z"
             }
           ]
         }
