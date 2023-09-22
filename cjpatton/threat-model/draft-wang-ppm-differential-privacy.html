@@ -1409,14 +1409,14 @@ formal description here.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">We say that two batches of measurements <code>D1</code> and <code>D2</code> are "neighboring" if they
 are the same length and contain all the same measurements except one (i.e., the
 symmetric difference between the multisets contains two elements).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1-4">Let <code>p(S, D, R)</code> denote the probability that randomized algorithm <code>S</code>, on input
-of measurements <code>D</code>, outputs aggregate result <code>R</code>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Let <code>p(S, D, r)</code> denote the probability that randomized algorithm <code>S</code>, on input
+of measurements <code>D</code>, outputs aggregate result <code>r</code>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">A randomized algorithm <code>S</code> is called "<code>EPSILON</code>-DP" if for all neighboring <code>D1</code>
-and <code>D2</code> and all possible aggregate results <code>S</code>, the following inequality
+and <code>D2</code> and all possible aggregate results <code>r</code>, the following inequality
 holds:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-6">
 <pre>
-p(S, D1, R) &lt;= exp(EPSILON) * p(S, D2, R)
+p(S, D1, r) &lt;= exp(EPSILON) * p(S, D2, r)
 </pre><a href="#section-3.1-6" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-7">In other words, the probability that neighboring inputs produce a given
@@ -1424,19 +1424,19 @@ aggregate result differs by at most a constant factor, <code>exp(EPSILON)</code>
 <p id="section-3.1-8">One can think of <code>EPSILON</code> as a measure of how much information about the
 measurements is leaked by the aggregate result: the smaller the <code>EPSILON</code>, the
 less information is leaked by <code>S</code>. For many DP mechanisms, it is possible to
-make <code>EPSILON</code> so close to <code>0</code> that the difference between <code>p(S, D1, R)</code> and
-<code>p(S, D2, R)</code> is negligible. However, this requires adding more noise, which
+make <code>EPSILON</code> so close to <code>0</code> that the difference between <code>p(S, D1, r)</code> and
+<code>p(S, D2, r)</code> is negligible. However, this requires adding more noise, which
 has an adverse impact on utility. Most applications will accept a
 non-negligible bound in order to achieve reasonable utility. See
 <a href="#dp-explainer" class="auto internal xref">Appendix B</a> for details.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.1-9">This notion of <code>EPSILON</code>-DP is sometimes referred to as "pure-DP". The
 following is a relaxation of pure-DP, called "approximate-DP", from <span>[<a href="#DR14" class="cite xref">DR14</a>]</span>. A
-randomized algorithm <code>R</code> is called "<code>(EPSILON, DELTA)</code>-DP" if for all
-neighboring <code>D1</code> and <code>D2</code> and all possible aggregate results <code>S</code>, the following
+randomized algorithm <code>S</code> is called "<code>(EPSILON, DELTA)</code>-DP" if for all
+neighboring <code>D1</code> and <code>D2</code> and all possible aggregate results <code>r</code>, the following
 inequality holds:<a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-10">
 <pre>
-p(S, D1, R) &lt;= exp(EPSILON) * p(S, D2, R) + DELTA
+p(S, D1, r) &lt;= exp(EPSILON) * p(S, D2, r) + DELTA
 </pre><a href="#section-3.1-10" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-11">Compared to pure-DP, approximate-DP loses an additive factor of <code>DELTA</code> in the

@@ -233,14 +233,14 @@ Table of Contents
    except one (i.e., the symmetric difference between the multisets
    contains two elements).
 
-   Let p(S, D, R) denote the probability that randomized algorithm S, on
-   input of measurements D, outputs aggregate result R.
+   Let p(S, D, r) denote the probability that randomized algorithm S, on
+   input of measurements D, outputs aggregate result r.
 
    A randomized algorithm S is called "EPSILON-DP" if for all
-   neighboring D1 and D2 and all possible aggregate results S, the
+   neighboring D1 and D2 and all possible aggregate results r, the
    following inequality holds:
 
-   p(S, D1, R) <= exp(EPSILON) * p(S, D2, R)
+   p(S, D1, r) <= exp(EPSILON) * p(S, D2, r)
 
    In other words, the probability that neighboring inputs produce a
    given aggregate result differs by at most a constant factor,
@@ -250,18 +250,18 @@ Table of Contents
    the measurements is leaked by the aggregate result: the smaller the
    EPSILON, the less information is leaked by S.  For many DP
    mechanisms, it is possible to make EPSILON so close to 0 that the
-   difference between p(S, D1, R) and p(S, D2, R) is negligible.
+   difference between p(S, D1, r) and p(S, D2, r) is negligible.
    However, this requires adding more noise, which has an adverse impact
    on utility.  Most applications will accept a non-negligible bound in
    order to achieve reasonable utility.  See Appendix B for details.
 
    This notion of EPSILON-DP is sometimes referred to as "pure-DP".  The
    following is a relaxation of pure-DP, called "approximate-DP", from
-   [DR14].  A randomized algorithm R is called "(EPSILON, DELTA)-DP" if
-   for all neighboring D1 and D2 and all possible aggregate results S,
+   [DR14].  A randomized algorithm S is called "(EPSILON, DELTA)-DP" if
+   for all neighboring D1 and D2 and all possible aggregate results r,
    the following inequality holds:
 
-   p(S, D1, R) <= exp(EPSILON) * p(S, D2, R) + DELTA
+   p(S, D1, r) <= exp(EPSILON) * p(S, D2, r) + DELTA
 
    Compared to pure-DP, approximate-DP loses an additive factor of DELTA
    in the bound.  This is to account for certain DP mechanisms that have
