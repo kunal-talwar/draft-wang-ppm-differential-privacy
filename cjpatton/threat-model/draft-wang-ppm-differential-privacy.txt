@@ -298,7 +298,7 @@ Table of Contents
 
    Whether this property holds for a given DP policy depends on which
    parties can be trusted to execute the protocol correctly (i.e., which
-   parties were not corrupted by the attacker).  We consider three,
+   parties are not corrupted by the attacker).  We consider three,
    increasingly pessimistic trust models.
 
 3.2.1.  OAMC: One-Aggregator-Most-Clients
