@@ -651,7 +651,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -744,7 +744,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -868,16 +868,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -890,6 +887,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -991,28 +991,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1053,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wang</td>
-<td class="center">Expires 21 March 2024</td>
+<td class="center">Expires 26 March 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-18" class="published">18 September 2023</time>
+<time datetime="2023-09-23" class="published">23 September 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-21">21 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-03-26">26 March 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1099,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1157,7 +1135,29 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-goals-and-threat-m" class="internal xref">Security Goals and Threat Model</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-goals-and-trust-mo" class="internal xref">Security Goals and Trust Model</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-differential-privacy" class="internal xref">Differential Privacy</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-trust-models" class="internal xref">Trust Models</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-oamc-one-aggregator-most-cl" class="internal xref">OAMC: One-Aggregator-Most-Clients</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-oaoc-one-aggregator-one-cli" class="internal xref">OAOC: One-Aggregator-One-Client</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-oc-one-client" class="internal xref">OC: One-Client</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-hedging" class="internal xref">Hedging</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-dp-mechanisms" class="internal xref">DP Mechanisms</a></p>
@@ -1216,7 +1216,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-overview-of-differential-pr" class="internal xref">Overview of Differential Privacy</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-differential-privacy-models" class="internal xref">Differential privacy models</a></p>
+                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-how-to-define-neighboring-b" class="internal xref">How to define neighboring batches</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
                 <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-differential-privacy-levels" class="internal xref">Differential privacy levels</a></p>
@@ -1287,7 +1287,10 @@ measurements (or substituting it with another).<a href="#section-1-3" class="pil
 mechanisms that endow them with this property. All such mechanisms work by
 introducing "noise" into the computation that is carefully calibrated for a
 number of application-specific parameters, including the structure and number
-of measurements and the desired aggregation function.<a href="#section-1-4" class="pilcrow">¶</a></p>
+of measurements, the desired aggregation function, and the degree of "utility"
+required. Intuitively, a high degree of privacy can be achieved by adding a lot
+of noise; but adding too much noise can reduce the usefulness of the aggregate
+result.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Noise can be introduced at various steps at the computation, and by various
 parties. Depending on the mechanism: the Clients might add noise to their own
 measurements; and the Aggregators might add noise to their aggregate shares (the
@@ -1295,14 +1298,18 @@ values they produce for the Collector).<a href="#section-1-5" class="pilcrow">¶
 <p id="section-1-6">In this document, we shall refer to the composition of DP mechanisms into a
 scheme that provides (some notion of) DP as a "DP policy". For some policies,
 noise is added only by the Clients or only by the Aggregators, but for others,
-noise might be added by both Clients and Aggregators.<a href="#section-1-6" class="pilcrow">¶</a></p>
+both Clients and Aggregators may participate in generating the noise.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The primary goal of this document is to specify how DP policies are implemented
 in DAP. It does so in the following stages:<a href="#section-1-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-8">
 <li id="section-1-8.1">
           <a href="#overview" class="auto internal xref">Section 3</a> describes the notion(s) of DP that are compatible with DAP and
-the threat model in which we hope to achieve DP. It also provides a
-systematization of applicable DP policies from the literature.<a href="#section-1-8.1" class="pilcrow">¶</a>
+provides a systematization of applicable DP policies from the literature.
+Security is defined in a few different "trust models" in which we assume
+that some fraction of the parties execute the protocol honestly. Of course
+in reality, whether such assumptions hold is usually outside of our control.
+Thus our goal is to design DP policies that still provide some degree of
+protection in more pessimistic trust models.<a href="#section-1-8.1" class="pilcrow">¶</a>
 </li>
         <li id="section-1-8.2">
           <a href="#mechanisms" class="auto internal xref">Section 4</a> specifies various mechanisms required for building DP
@@ -1325,11 +1332,9 @@ want to implement.]<a href="#section-1-8.4" class="pilcrow">¶</a>
       </ol>
 <p id="section-1-9">The following considerations are out-of-scope for this document:<a href="#section-1-9" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-10">
-<li id="section-1-10.1">Apart from privacy, the primary consideration for choosing a DP policy and
-calibrating it for an application is "utility". Intuitively, the more noise
-is added, the stronger the DP guarantee, but adding too much noise can
-reduce the veracity of the result. This document provides no guidance for
-this selection process.<a href="#section-1-10.1" class="pilcrow">¶</a>
+<li id="section-1-10.1">DP policies have a few parameters that need to be tuned in order to meet the
+privacy/utility tradeoff required by the application. This document provides
+no guidance for this process.<a href="#section-1-10.1" class="pilcrow">¶</a>
 </li>
         <li id="section-1-10.2">This document describes a particular class of narrowly-scoped DP policies.
 Other, more sophisticated policies are possible. [TODO: Add citations.]<a href="#section-1-10.2" class="pilcrow">¶</a>
@@ -1352,19 +1357,162 @@ classes of VDAFs.<a href="#section-1-10.3" class="pilcrow">¶</a>
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document uses the same conventions for error handling as <span>[<a href="#DAP" class="cite xref">DAP</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-2-3.1">
-          <p id="section-2-3.1.1">TODO: add more<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
+<p id="section-2-3">Let <code>exp(EPSILON)</code> denote raising the numeric constant <code>e</code> to the power of
+<code>EPSILON</code>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="overview">
 <section id="section-3">
-      <h2 id="name-security-goals-and-threat-m">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-goals-and-threat-m" class="section-name selfRef">Security Goals and Threat Model</a>
+      <h2 id="name-security-goals-and-trust-mo">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-goals-and-trust-mo" class="section-name selfRef">Security Goals and Trust Model</a>
       </h2>
-<p id="section-3-1">TODO<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="differential-privacy">
+<section id="section-3.1">
+        <h3 id="name-differential-privacy">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-differential-privacy" class="section-name selfRef">Differential Privacy</a>
+        </h3>
+<p id="section-3.1-1">DP formalizes a property of any randomized algorithm that takes in a sequence
+of measurements, aggregates them, and outputs an aggregate result. Intuitively,
+this property guarantees that no single measurement signficantly impacts the
+value of the aggregate result. This intuition is formalized by <span>[<a href="#DMNS06" class="cite xref">DMNS06</a>]</span> as
+follows.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.1-2.1">
+            <p id="section-3.1-2.1.1">CP: The following is might be too jargony for an informative RFC, but for now
+I think we're all just trying to agree on the definition. Once we have
+consensus among ourselves, we can punt this to the appendix and leave a less
+formal description here.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.1-3">We say that two batches of measurements <code>D1</code> and <code>D2</code> are "neighboring" if they
+are the same length and contain all the same measurements except one (i.e., the
+symmetric difference between the multisets contains two elements).<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Let <code>p(S, D, r)</code> denote the probability that randomized algorithm <code>S</code>, on input
+of measurements <code>D</code>, outputs aggregate result <code>r</code>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">A randomized algorithm <code>S</code> is called "<code>EPSILON</code>-DP" if for all neighboring <code>D1</code>
+and <code>D2</code> and all possible aggregate results <code>r</code>, the following inequality
+holds:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-6">
+<pre>
+p(S, D1, r) &lt;= exp(EPSILON) * p(S, D2, r)
+</pre><a href="#section-3.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-7">In other words, the probability that neighboring inputs produce a given
+aggregate result differs by at most a constant factor, <code>exp(EPSILON)</code>.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-8">One can think of <code>EPSILON</code> as a measure of how much information about the
+measurements is leaked by the aggregate result: the smaller the <code>EPSILON</code>, the
+less information is leaked by <code>S</code>. For many DP mechanisms, it is possible to
+make <code>EPSILON</code> so close to <code>0</code> that the difference between <code>p(S, D1, r)</code> and
+<code>p(S, D2, r)</code> is negligible. However, this requires adding more noise, which
+has an adverse impact on utility. Most applications will accept a
+non-negligible bound in order to achieve reasonable utility. See
+<a href="#dp-explainer" class="auto internal xref">Appendix B</a> for details.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+<p id="section-3.1-9">This notion of <code>EPSILON</code>-DP is sometimes referred to as "pure-DP". The
+following is a relaxation of pure-DP, called "approximate-DP", from <span>[<a href="#DR14" class="cite xref">DR14</a>]</span>. A
+randomized algorithm <code>S</code> is called "<code>(EPSILON, DELTA)</code>-DP" if for all
+neighboring <code>D1</code> and <code>D2</code> and all possible aggregate results <code>r</code>, the following
+inequality holds:<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-10">
+<pre>
+p(S, D1, r) &lt;= exp(EPSILON) * p(S, D2, r) + DELTA
+</pre><a href="#section-3.1-10" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-11">Compared to pure-DP, approximate-DP loses an additive factor of <code>DELTA</code> in the
+bound. This is to account for certain DP mechanisms that have some desirable
+properties, but are not pure-DP. See <a href="#mechanisms" class="auto internal xref">Section 4</a> for details.<a href="#section-3.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.1-12">Other variants of DP are possible; see the literature review in
+<a href="#dp-explainer" class="auto internal xref">Appendix B</a> for details.<a href="#section-3.1-12" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="trust-models">
+<section id="section-3.2">
+        <h3 id="name-trust-models">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-trust-models" class="section-name selfRef">Trust Models</a>
+        </h3>
+<p id="section-3.2-1">When considering whether a given DP policy is sufficient for DAP, it is not
+enough to consider the mechanisms used in isolation. It is also necessary to
+consider the process by which the policy is executed. In particular, our threat
+model for DAP considers an attacker that participates in the upload,
+aggregation, and collection protocols and may use its resources to attack the
+underlying cryptographic primitives (VDAF <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>, HPKE <span>[<a href="#RFC9180" class="cite xref">RFC9180</a>]</span>, and TLS
+<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>).<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">To account for such attackers, our goal for DAP is "computational-DP" as
+described by <span>[<a href="#MPRV09" class="cite xref">MPRV09</a>]</span> (Definition 4, "SIM-CDP"). This formalizes the amount
+of information a computationally bounded attacker can glean about the
+measurements generated by honest Clients over the course of its attack on the
+protocol. We consider an attacker that controls the network and statically
+corrupts a subset of the parties.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">We say the protocol is pure-DP (resp. approximate-DP) if the view of any
+computationally bounded attacker can be efficiently simulated by a simulator
+that itself is pure-DP (or approximate-DP) as defined above. (The simulator
+takes the measurements as input and outputs a value that is computationally
+indistinguishable from the transcript of the protocol's execution in the
+presence of the attacker.)<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">Whether this property holds for a given DP policy depends on which parties can
+be trusted to execute the protocol correctly (i.e., which parties are not
+corrupted by the attacker). We consider three, increasingly pessimistic trust
+models.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<div id="oamc-one-aggregator-most-clients">
+<section id="section-3.2.1">
+          <h4 id="name-oamc-one-aggregator-most-cl">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-oamc-one-aggregator-most-cl" class="section-name selfRef">OAMC: One-Aggregator-Most-Clients</a>
+          </h4>
+<p id="section-3.2.1-1">Assume that most Clients and one Aggregator are honest and that the other
+Aggregator and the Collector are controlled by the attacker. When all Clients
+are honest, this corresponds to the same trust model as the base DAP protocol.
+Te degree of privacy provided (i.e., the value of <code>EPSILON</code> for pure-DP)
+should degrade gracefully as the number of honest Clients decreases.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="oaoc-one-aggregator-one-client">
+<section id="section-3.2.2">
+          <h4 id="name-oaoc-one-aggregator-one-cli">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-oaoc-one-aggregator-one-cli" class="section-name selfRef">OAOC: One-Aggregator-One-Client</a>
+          </h4>
+<p id="section-3.2.2-1">Assume that at least one Aggregator is honest. The other Aggregator, the
+Collector, and all but one Clients are controlled by the attacker. The goal is
+to provide protection for the honest Client's measurement.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.2.2-2.1">
+              <p id="section-3.2.2-2.1.1">TODO(issue#15) For the simple Aggregator-noise mechanism, if the malicious
+Aggregator cheats by not adding noise, then the aggregate result is not DP
+from the point of view of the honest Aggregator, unless the honest
+Aggregagtor "forgets" the randomness it used. Describe this "attack" in
+"Security Considerations" and say why it's irrelevant.<a href="#section-3.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="oc-one-client">
+<section id="section-3.3">
+        <h3 id="name-oc-one-client">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-oc-one-client" class="section-name selfRef">OC: One-Client</a>
+        </h3>
+<p id="section-3.3-1">Assume that all parties, including all but one Client, both Aggregators, and
+the Collector are controlled by the attacker. The best a policy can hope for is
+that the honest Client's measurement has "local-DP". This property is defined
+the same way as pure- or approximate-DP, except that the bound that we aim to
+achieve is looser than what we can get in a more optimisitc trust model.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hedging">
+<section id="section-3.4">
+        <h3 id="name-hedging">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-hedging" class="section-name selfRef">Hedging</a>
+        </h3>
+<p id="section-3.4-1">If a trust model's assumptions turn out to be false in practice, then it is
+desirable for a DP policy to maintain some degree of privacy in a more
+pessimistic trust model. For example, a deployment of DAP might provide some
+mechanism to ensure that all reports that are consumed were generated by
+trusted Clients (e.g., a Trusted Execution Environment (TEE) at each Client).
+This gives us confidence that our assumptions in the OAMC trust model hold. But
+if this mechanism is broken (e.g., a flaw is found in the TEE), then it is
+desirable if the policy remains DP in the OAOC or OC model, perhaps with a
+weaker bound.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="mechanisms">
@@ -1735,6 +1883,14 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9180">[RFC9180]</dt>
+        <dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Bhargavan, K.</span>, <span class="refAuthor">Lipp, B.</span>, and <span class="refAuthor">C. Wood</span>, <span class="refTitle">"Hybrid Public Key Encryption"</span>, <span class="seriesInfo">RFC 9180</span>, <span class="seriesInfo">DOI 10.17487/RFC9180</span>, <time datetime="2022-02" class="refDate">February 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9180">https://www.rfc-editor.org/rfc/rfc9180</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="VDAF">[VDAF]</dt>
       <dd>
 <span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Cook, D.</span>, <span class="refAuthor">Patton, C.</span>, and <span class="refAuthor">P. Schoppmann</span>, <span class="refTitle">"Verifiable Distributed Aggregation Functions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vdaf-06</span>, <time datetime="2023-06-15" class="refDate">15 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-06">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-06</a>&gt;</span>. </dd>
@@ -1770,6 +1926,10 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
         <dd>
 <span class="refAuthor">Feldman, V.</span>, <span class="refAuthor">McMillan, A.</span>, and <span class="refAuthor">K. Talwar</span>, <span class="refTitle">"Stronger Privacy Amplification by Shuffling for Rényi and Approximate Differential Privacy"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://arxiv.org/abs/2208.04591">https://arxiv.org/abs/2208.04591</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="KM11">[KM11]</dt>
+        <dd>
+<span class="refAuthor">Kifer, D.</span> and <span class="refAuthor">A. Machanavajjhala</span>, <span class="refTitle">"No free lunch in data privacy"</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="https://dl.acm.org/doi/abs/10.1145/1989323.1989345">https://dl.acm.org/doi/abs/10.1145/1989323.1989345</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="KOV15">[KOV15]</dt>
         <dd>
 <span class="refAuthor">Kairouz, P.</span>, <span class="refAuthor">Oh, S.</span>, and <span class="refAuthor">P. Viswanath</span>, <span class="refTitle">"The Composition Theorem for Differential Privacy"</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="http://proceedings.mlr.press/v37/kairouz15.pdf">http://proceedings.mlr.press/v37/kairouz15.pdf</a>&gt;</span>. </dd>
@@ -1779,8 +1939,12 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
 <span class="refAuthor">Mironov, I.</span>, <span class="refTitle">"Rényi Differential Privacy"</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://arxiv.org/abs/1702.07476">https://arxiv.org/abs/1702.07476</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MJTBp22">[MJTBp22]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">McMillan, A.</span>, <span class="refAuthor">Javidbakht, O.</span>, <span class="refAuthor">Talwar, K.</span>, <span class="refAuthor">Briggs, E.</span>, <span class="refAuthor">Chatzidakis, M.</span>, <span class="refAuthor">Chen, J.</span>, <span class="refAuthor">Duchi, J.</span>, <span class="refAuthor">Feldman, V.</span>, <span class="refAuthor">Goren, Y.</span>, <span class="refAuthor">Hesse, M.</span>, <span class="refAuthor">Jina, V.</span>, <span class="refAuthor">Katti, A.</span>, <span class="refAuthor">Liu, A.</span>, <span class="refAuthor">Lyford, C.</span>, <span class="refAuthor">Meyer, J.</span>, <span class="refAuthor">Palmer, A.</span>, <span class="refAuthor">Park, D.</span>, <span class="refAuthor">Park, W.</span>, <span class="refAuthor">Parsa, G.</span>, <span class="refAuthor">Pelzl, P.</span>, <span class="refAuthor">Rishi, R.</span>, <span class="refAuthor">Song, C.</span>, <span class="refAuthor">Wang, S.</span>, and <span class="refAuthor">S. Zhou</span>, <span class="refTitle">"Private Federated Statistics in an Interactive Setting"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://arxiv.org/abs/2211.10082">https://arxiv.org/abs/2211.10082</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MPRV09">[MPRV09]</dt>
+      <dd>
+<span class="refAuthor">Mironov, I.</span>, <span class="refAuthor">Pandey, O.</span>, <span class="refAuthor">Reingold, O.</span>, and <span class="refAuthor">S. Vadhan</span>, <span class="refTitle">"Computational Differential Privacy"</span>, <span>n.d.</span>, <span>&lt;<a href="https://link.springer.com/chapter/10.1007/978-3-642-03356-8_8">https://link.springer.com/chapter/10.1007/978-3-642-03356-8_8</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1795,7 +1959,7 @@ Columbia University
 pierre@cs.columbia.edu<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="overview-of-differential-privacy">
+<div id="dp-explainer">
 <section id="appendix-B">
       <h2 id="name-overview-of-differential-pr">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-overview-of-differential-pr" class="section-name selfRef">Overview of Differential Privacy</a>
@@ -1808,28 +1972,16 @@ provides a strong, quantifiable and composable privacy guarantee. The main idea
 of differential privacy is to add carefully calibrated noise to the results,
 which makes it difficult to determine with high certainty whether a specific
 individual's data was included in the results or not.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="differential-privacy-models">
+<div id="how-to-define-neighboring-batches">
 <section id="appendix-B.1">
-        <h3 id="name-differential-privacy-models">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-differential-privacy-models" class="section-name selfRef">Differential privacy models</a>
+        <h3 id="name-how-to-define-neighboring-b">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-how-to-define-neighboring-b" class="section-name selfRef">How to define neighboring batches</a>
         </h3>
-<p id="appendix-B.1-1">There are two model of differential privacy: deletion differential privacy (
-deletion dp) and replacement differntial privacy (replacement dp).<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-B.1-2.1">
-            <p id="appendix-B.1-2.1.1">OPEN ISSUE: or call it substitution dp.<a href="#appendix-B.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="appendix-B.1-3">For two dataset X and Y that differ only by 1 data point. Then the difference
-between the two are:
-* Replacement DP: Y differs from X by replacing a data point in X.
-* Deletion DP: Y differs from X by removing a data point in X.<a href="#appendix-B.1-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="appendix-B.1-4.1">
-            <p id="appendix-B.1-4.1.1">TODO: make the definition more accurate
-TODO: talk about the relationship of the two<a href="#appendix-B.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="appendix-B.1-1">There are primarily two ways of in the literature for defining "neighboring
+batches": deletion (or addition) of one measurement and substitution of one
+measurement with another <span>[<a href="#KM11" class="cite xref">KM11</a>]</span>. Only the latter ("substitution DP") applies
+to DAP, as the protocol leaks the number of measurements in each batch
+collected.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="levels">
