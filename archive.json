@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-09-21T00:51:38.430908+00:00",
+  "timestamp": "2023-09-24T00:54:52.303643+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -2178,25 +2178,35 @@
       "id": "PR_kwDOJ7sZWc5anwBg",
       "title": "Describe DP goals and threat model",
       "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Whoops, re-do of #16. I merged an intermediate commit, which seems to have confused GitHub.\r\n",
       "createdAt": "2023-09-18T23:28:20Z",
-      "updatedAt": "2023-09-20T23:37:03Z",
+      "updatedAt": "2023-09-23T01:05:53Z",
       "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "baseRefName": "main",
       "baseRefOid": "6bfffda2f2961a058ae5270f6bd570610d216480",
       "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "headRefName": "cjpatton/threat-model",
-      "headRefOid": "fd02abbc84d1df0a15c58603e02d7d2f8e7745ef",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "03220d61cf1d470138715eee04070d5818a5a16a",
+      "closedAt": "2023-09-23T01:05:52Z",
+      "mergedAt": "2023-09-23T01:05:52Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "8183bfa36913b04022251b6851af83553ed88013"
+      },
+      "comments": [
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Squashed.",
+          "createdAt": "2023-09-23T01:04:53Z",
+          "updatedAt": "2023-09-23T01:04:53Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJ7sZWc5hSOfB",
@@ -2204,7 +2214,7 @@
             "abbreviatedOid": "2e63432"
           },
           "author": "martinthomson",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-18T23:59:33Z",
@@ -2282,7 +2292,7 @@
             "abbreviatedOid": "2e63432"
           },
           "author": "martinthomson",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-19T00:09:19Z",
@@ -2362,7 +2372,7 @@
             "abbreviatedOid": "2e63432"
           },
           "author": "martinthomson",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-19T00:42:05Z",
@@ -2382,7 +2392,7 @@
             "abbreviatedOid": "2e63432"
           },
           "author": "martinthomson",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-19T00:48:31Z",
@@ -2706,7 +2716,7 @@
             "abbreviatedOid": "bb43d30"
           },
           "author": "tholop",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-20T19:34:01Z",
@@ -2929,6 +2939,263 @@
               "updatedAt": "2023-09-20T23:36:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hjt7T",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "tholop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-21T01:53:50Z",
+          "updatedAt": "2023-09-21T01:53:50Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "I see, although I'd say that in that case privacy is trivially true rather than meaningless (\"for all neighboring databases in \\emptyset, ...\"). \r\n\r\nBut if we want to consider at least one honest Client, then we could make it explicit in the trust model, and say \"all but one Client\" instead of \"most Clients\". The separation between OneAggregator-MostClients and OneAggregator-OneClient seems cleaner than between OneAggregator-MostClients and OneAggregator-FewClients. ",
+              "createdAt": "2023-09-21T01:53:50Z",
+              "updatedAt": "2023-09-21T01:53:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hmCdQ",
+          "commit": {
+            "abbreviatedOid": "fd02abb"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks good to me. ",
+          "createdAt": "2023-09-21T09:26:13Z",
+          "updatedAt": "2023-09-21T09:26:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hqkyU",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-21T19:21:39Z",
+          "updatedAt": "2023-09-21T19:21:39Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "Done.",
+              "createdAt": "2023-09-21T19:21:39Z",
+              "updatedAt": "2023-09-21T19:21:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hqlk5",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-21T19:23:49Z",
+          "updatedAt": "2023-09-21T19:23:49Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "Well, ideally what we want is that that DP bound we can prove depends on the number of honest Clients: if all clients are honest then we get a great bound; if most are malicious, then we still the remaining Clients still get some degree of protection.",
+              "createdAt": "2023-09-21T19:23:49Z",
+              "updatedAt": "2023-09-21T19:23:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hrQ--",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "tholop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-21T21:25:30Z",
+          "updatedAt": "2023-09-21T21:25:30Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "That makes sense, if we have a bound that degrades gracefully when the number of honest Clients decreases, then OneAggregator-OneClient is simply a special case of this more general bound. But can't we capture this graceful degradation directly in the OA-MC trust model?\r\n\r\nTwo things still bug me a little with the current definition of OA, which is really OneAggregator-FewClients.\r\n- For a simple policy like Aggregator-side noise, the bound does not even depend on the number of honest Clients. So aggregator-side noise is secure under OneAggregator-OneClient. It seems wasteful to request stronger (and possibly more vague) trust assumptions in the form of OneAggregator-FewClients, when we really only need OneAggregator-OneClient.\r\n- Currently, the separation between OA and OA-MC seems a bit blurry: when do we go from \"most Clients are honest\" (OA-MC) to \"most Clients are malicious\" (OA)? Do we have protocols that drastically change when we go from 51% honest to 49% honest? I'd expect this kind of separation (maybe with a 2/3 threshold instead of 1/2) when we do MPC, but I don't think we're considering these protocols for now.\r\n\r\n",
+              "createdAt": "2023-09-21T21:25:30Z",
+              "updatedAt": "2023-09-21T21:25:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hrSta",
+          "commit": {
+            "abbreviatedOid": "d00a636"
+          },
+          "author": "tholop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-21T21:32:14Z",
+          "updatedAt": "2023-09-21T21:35:57Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Does OAMC really correspond to the DAP trust model? I think that OA corresponds better, and I think that @simon-friedberger made the same point here: https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/17#discussion_r1329844060. \r\n\r\nIf I understand correctly, DAP only says \"Individual users can reveal their own measurement and compromise their own privacy.\" and doesn't limit the number of Clients who do so.",
+              "createdAt": "2023-09-21T21:32:14Z",
+              "updatedAt": "2023-09-21T21:35:57Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "```suggestion\r\nAggregator and the Collector are controlled by the attacker. This corresponds to\r\n```",
+              "createdAt": "2023-09-21T21:35:52Z",
+              "updatedAt": "2023-09-21T21:35:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hr6pC",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-22T00:25:58Z",
+          "updatedAt": "2023-09-22T00:25:58Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "\r\n>     * For a simple policy like Aggregator-side noise, the bound does not even depend on the number of honest Clients. So aggregator-side noise is secure under OneAggregator-OneClient. It seems wasteful to request stronger (and possibly more vague) trust assumptions in the form of OneAggregator-FewClients, when we really only need OneAggregator-OneClient.\r\n\r\n\r\nI agree that this distinction doesn't matter. However the distinction between OA-OC and OA-MC is important because, if you're targeting OA-MC, but it turns out that you're in OA-OC, then you may not have any privacy at all, say, if you're doing Client-only noise. On the other hand, if you're targeting OA-OC and use Aggregator-only noise, then you may end up with more utility loss than had you targeted OA-MC.\r\n\r\nI've changed \"OA\" to \"OAOC\" as you suggest.\r\n\r\n>     * Currently, the separation between OA and OA-MC seems a bit blurry: when do we go from \"most Clients are honest\" (OA-MC) to \"most Clients are malicious\" (OA)? Do we have protocols that drastically change when we go from 51% honest to 49% honest? I'd expect this kind of separation (maybe with a 2/3 threshold instead of 1/2) when we do MPC, but I don't think we're considering these protocols for now.\r\n\r\nWe are considering protocols like DPrio, where the privacy degrades as the number of corrupt clients increases. We're also considering pure Client-noise, which should similarly degrade gracefully. I don't expect we'll have schemes where the DP bound suddenly plummets once one more Client starts cheating!\r\n\r\n",
+              "createdAt": "2023-09-22T00:25:58Z",
+              "updatedAt": "2023-09-22T00:25:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hr7AP",
+          "commit": {
+            "abbreviatedOid": "d00a636"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-22T00:28:33Z",
+          "updatedAt": "2023-09-22T00:28:33Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "The base protocol is meant to provide private aggregation (the attacker learns nothing but the aggregate result) up to Sybil attacks. That means the protocol only achieves its goals when the attacker does not control any of the inputs to aggregation.\r\n\r\nI think you're right that it's different, mainly due to the word \"most\". I've clarified.",
+              "createdAt": "2023-09-22T00:28:33Z",
+              "updatedAt": "2023-09-22T00:28:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hr7vZ",
+          "commit": {
+            "abbreviatedOid": "a0be012"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-22T00:32:31Z",
+          "updatedAt": "2023-09-22T00:40:03Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "```suggestion\r\nbe trusted to execute the protocol correctly (i.e., which parties are not\r\n```\r\n\r\n?",
+              "createdAt": "2023-09-22T00:35:32Z",
+              "updatedAt": "2023-09-22T00:40:03Z"
+            },
+            {
+              "originalPosition": 108,
+              "body": "The rest of the document seems to call the randomized algorithm as `R`, and aggregate result as `S`.",
+              "createdAt": "2023-09-22T00:38:08Z",
+              "updatedAt": "2023-09-22T00:40:03Z"
+            },
+            {
+              "originalPosition": 108,
+              "body": "also one nit thing: I don't know if you intend to use a mixture of \"randomized algorithm\" and \"DP mechanism\", but they seem to mean the same to me.",
+              "createdAt": "2023-09-22T00:39:51Z",
+              "updatedAt": "2023-09-22T00:40:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hsBKc",
+          "commit": {
+            "abbreviatedOid": "f0e4d1b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-22T00:46:46Z",
+          "updatedAt": "2023-09-22T00:47:24Z",
+          "comments": [
+            {
+              "originalPosition": 108,
+              "body": "* Arg... I meant to use `S` for the algorithm and `r` for the aggregate result. Fixed now (hopefully).\r\n* They're slightly different because the \"DP mechanism\" just generates noise; the \"randomized algorithm\" here aggregates then invokes a DP mechanism.",
+              "createdAt": "2023-09-22T00:46:46Z",
+              "updatedAt": "2023-09-22T00:47:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hwOwU",
+          "commit": {
+            "abbreviatedOid": "e9d2c9b"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-22T14:03:44Z",
+          "updatedAt": "2023-09-22T14:03:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hyMMl",
+          "commit": {
+            "abbreviatedOid": "bb43d30"
+          },
+          "author": "tholop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-09-22T19:41:04Z",
+          "updatedAt": "2023-09-22T19:41:04Z",
+          "comments": [
+            {
+              "originalPosition": 173,
+              "body": "Great, thanks @cjpatton!",
+              "createdAt": "2023-09-22T19:41:04Z",
+              "updatedAt": "2023-09-22T19:41:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5hyMoA",
+          "commit": {
+            "abbreviatedOid": "e9d2c9b"
+          },
+          "author": "tholop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-22T19:42:23Z",
+          "updatedAt": "2023-09-22T19:42:23Z",
+          "comments": []
         }
       ]
     }
