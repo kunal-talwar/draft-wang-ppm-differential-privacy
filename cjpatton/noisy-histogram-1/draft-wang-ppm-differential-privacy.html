@@ -1718,6 +1718,85 @@ suffices for https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/287 and
 specify a policy for it.<a href="#section-6.1.1-1.1.3" class="pilcrow">¶</a></p>
 </li>
           </ul>
+<p id="section-6.1.1-2">Client-DP allows Clients to protect their privacy by adding noise to their
+measurements directly, as described in <a href="#levels" class="auto internal xref">Appendix B.2</a>. Analyses (<span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and
+<span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>) have shown that the central DP guarantee can also be amplified
+by aggregating Clients' measurements with Client-DP.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-3">For this particular instantiation of <code>Prio3SumVec</code> with <code>bits = 1</code>, i.e. each
+value in the vector is either a 0 or 1, we can apply randomized response <a href="#rr" class="auto internal xref">Section 4.3</a>
+Client-DP to Clients' measurements, with a configured Client-DP with <code>EPSILON_0</code>
+parameter.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-4">The DP guarantee is met, as long as there are at least "minimum batch size"
+number of Clients, each of which adds the randomized response Client-DP.
+However, in case the minimum batch size is not met when Aggregators want to
+output their aggregate shares, each Aggregator can sample the same randomized
+response Client-DP on the "missing" Clients with zero-hot vectors, so the
+central DP guarantee can still be satisfied, based on the privacy amplification
+analysis in <span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and <span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1.1-5">
+<pre>
+class Prio3SumVecWithRandomizedResponse:
+    Measurement = Vec[Unsigned]
+    AggregateShare = Vec[Field]
+    AggregateResult = Vec[Unsigned]
+    DebiasedAggregateResult = Vec[float]
+
+    def __init__(self,
+                 rr_mechanism: DpMechanism):
+        self.rr_mechanism = rr_mechanism
+
+    def add_noise_to_measurement(self,
+                                 meas: Measurement,
+                                 ) -&gt; Measurement:
+        """
+        Apply randomized response mechanism to measurement.
+        """
+        return self.rr_mechanism.add_noise(meas)
+
+    def add_noise_to_agg_share(self,
+                               agg_share: AggregateShare,
+                               meas_count: Unsigned,
+                               min_batch_size: Unsigned,
+                               ) -&gt; AggregateShare:
+        """
+        If minimum batch size is met, this function does nothing,
+        because DP guarantee would have already been met.
+        Otherwise, add the same randomized response noise on the
+        missing Clients.
+        """
+        if meas_count &gt;= batch_size:
+            return agg_share
+        noise = self.rr_mechanism.sample_noise(
+            batch_size - meas_count, len(agg_share)
+        )
+        return [a + Field(b) for (a, b) in zip(agg_share, noise)]
+
+    def debias_agg_result(self,
+                          agg_result: AggregateResult,
+                          meas_count: Unsigned,
+                          min_batch_size: Unsigned,
+                          num_aggregators: Unsigned,
+                          ) -&gt; DebiasedAggregateResult:
+        """
+        Debias aggregate result with randomized response.
+        """
+        if meas_count &gt;= min_batch_size:
+            return self.rr_mechanism.debias(agg_result, meas_count)
+        # The count passed to debiasing will be:
+        # the number of actual Clients + the "missing" Clients
+        # sampled by all Aggregators.
+        debiasing_count = \
+            meas_count + \
+            num_aggregators * (min_batch_size - meas_count)
+        return self.rr_mechanism.debias(agg_result, debiasing_count)
+</pre><a href="#section-6.1.1-5" class="pilcrow">¶</a>
+</div>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.1-6.1">
+              <p id="section-6.1.1-6.1.1">TODO(issue #10): replace <code>rr_mechanism</code> once we have concretely defined
+it in <a href="#rr" class="auto internal xref">Section 4.3</a>.<a href="#section-6.1.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 <div id="prio3histogram-with-aggregator-noise">
@@ -1729,6 +1808,67 @@ specify a policy for it.<a href="#section-6.1.1-1.1.3" class="pilcrow">¶</a></p
 <li class="normal ulEmpty" id="section-6.1.2-1.1">
               <p id="section-6.1.2-1.1.1">TODO Describe a policy that is compatilbe with Prio3Histogram and that
 targets the OAOC trust model.<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<div class="alignLeft art-text artwork" id="section-6.1.2-2">
+<pre>
+class Prio3HistogramWithDiscreteGaussian:
+    Measurement = Unsigned
+    AggregateShare = Vec[Field]
+    AggregateResult = Vec[int]
+    DebiasedAggregateResult = AggregateResult
+
+    def __init__(self,
+                 dgauss_mechanism: DpMechanism,
+                 ):
+        self.dgauss_mechanism = dgauss_mechanism
+
+    def add_noise_to_measurement(self,
+                                 meas: Measurement,
+                                 ) -&gt; Measurement:
+        """
+        No Client-DP here.
+        """
+        return meas
+
+    def add_noise_to_agg_share(self,
+                               agg_share: AggregateShare,
+                               meas_count: Unsigned,
+                               min_batch_size: Unsigned,
+                               ) -&gt; AggregateShare:
+        """
+        Sample discrete Gaussian noise, and merge it with
+        aggregate share.
+        """
+        # Sample the noise once, with length equal to the length
+        # of aggregate share.
+        noise_vec = self.dgauss_mechanism.sample_noise(
+            1, len(agg_share)
+        )
+        result = []
+        for i in range(len(agg_share)):
+            noise = noise_vec[i]
+            if noise &lt; 0:
+                noise = Field.MODULUS + noise
+            result.append(agg_share[i] + Field(noise))
+        return result
+
+    def debias_agg_result(self,
+                          agg_result: AggregateResult,
+                          meas_count: Unsigned,
+                          min_batch_size: Unsigned,
+                          num_aggregators: Unsigned,
+                          ) -&gt; DebiasedAggregateResult:
+        """
+        No debiasing.
+        """
+        return agg_result
+</pre><a href="#section-6.1.2-2" class="pilcrow">¶</a>
+</div>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.2-3.1">
+              <p id="section-6.1.2-3.1.1">TODO(issue #10): replace <code>dgauss_mechanism</code> once we have concretely defined
+it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a href="#section-6.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
