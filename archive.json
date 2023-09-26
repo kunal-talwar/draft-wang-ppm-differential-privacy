@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-09-24T00:54:52.303643+00:00",
+  "timestamp": "2023-09-26T00:52:38.134611+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -3196,6 +3196,59 @@
           "createdAt": "2023-09-22T19:42:23Z",
           "updatedAt": "2023-09-22T19:42:23Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOJ7sZWc5bKis_",
+      "title": "Create skeleton for noisy histograms use case",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/19",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-09-25T20:42:41Z",
+      "updatedAt": "2023-09-26T00:12:17Z",
+      "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "8183bfa36913b04022251b6851af83553ed88013",
+      "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "headRefName": "cjpatton/noisy-histogram-1",
+      "headRefOid": "8bf742cf86e9ef1884b573dc6c2cffbce257ed70",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ7sZWc5h8HQg",
+          "commit": {
+            "abbreviatedOid": "8bf742c"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-26T00:10:28Z",
+          "updatedAt": "2023-09-26T00:12:17Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n> TODO Describe a policy that is compatible with Prio3Histogram and that\r\n```",
+              "createdAt": "2023-09-26T00:10:28Z",
+              "updatedAt": "2023-09-26T00:12:17Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "I don't think readers will be convinced on optimal utility if we don't provide some numbers, but I'm fine with leaving the text as-is, and we will work on it later on.",
+              "createdAt": "2023-09-26T00:11:49Z",
+              "updatedAt": "2023-09-26T00:12:17Z"
+            }
+          ]
         }
       ]
     }
