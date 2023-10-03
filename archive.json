@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-01T00:59:17.244365+00:00",
+  "timestamp": "2023-10-03T00:53:10.858753+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -3304,6 +3304,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOJ7sZWc5bt1Mb",
+      "title": "Fix author list so everyone shows in editor mode",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/20",
+      "state": "OPEN",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-02T21:15:29Z",
+      "updatedAt": "2023-10-02T21:15:29Z",
+      "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "8183bfa36913b04022251b6851af83553ed88013",
+      "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "headRefName": "wangshan/fix-author-list",
+      "headRefOid": "9935fa815da9c3d5c7356a57592a795463e97c60",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
