@@ -2,10 +2,13 @@
 
 
 
-Privacy Preserving Measurement                                   S. Wang
+Privacy Preserving Measurement                                   J. Chen
 Internet-Draft                                                Apple Inc.
-Intended status: Informational                         23 September 2023
-Expires: 26 March 2024
+Intended status: Informational                                 C. Patton
+Expires: 5 April 2024                                         Cloudflare
+                                                                 S. Wang
+                                                              Apple Inc.
+                                                          3 October 2023
 
 
                 Differential Privacy Mechanisms for DAP
@@ -48,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2024.
+   This Internet-Draft will expire on 5 April 2024.
 
 Copyright Notice
 
@@ -101,7 +104,7 @@ Table of Contents
        B.5.2.  Zero Concentrated-DP
      B.6.  Sensitivity
      B.7.  Data type and Noise type
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -865,7 +868,17 @@ B.7.  Data type and Noise type
       TODO: Chris P: we will mention Prio3SumVec because that's what we
       use to describe aggregator DP with amplification
 
-Author's Address
+Authors' Addresses
+
+   Junye Chen
+   Apple Inc.
+   Email: junyec@apple.com
+
+
+   Christopher Patton
+   Cloudflare
+   Email: chrispatton+ietf@gmail.com
+
 
    Shan Wang
    Apple Inc.
