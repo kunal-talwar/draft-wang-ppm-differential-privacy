@@ -9,26 +9,26 @@
 <meta content="
        TODO Abstract 
     " name="description">
-<meta content="xml2rfc 3.18.0" name="generator">
+<meta content="xml2rfc 3.18.1" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
 <meta content="draft-wang-ppm-differential-privacy-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.0
+  xml2rfc 3.18.1
     Python 3.11.5
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.10.0
+    platformdirs 3.11.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.31.0
     setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.8
 -->
 <link href="draft-wang-ppm-differential-privacy.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1027,11 +1027,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DP-PPM</td>
-<td class="right">September 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wang</td>
-<td class="center">Expires 28 March 2024</td>
+<td class="center">Expires 12 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-25" class="published">25 September 2023</time>
+<time datetime="2023-10-10" class="published">10 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-28">28 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-12">12 April 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1099,7 +1099,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1188,10 +1188,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-histograms" class="internal xref">Histograms</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
-                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-prio3histogram-with-client-" class="internal xref">Prio3Histogram with Client Noise</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-prio3histogram-with-client-" class="internal xref">Prio3Histogram with Client-DP</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
-                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-prio3histogram-with-aggrega" class="internal xref">Prio3Histogram with Aggregator Noise</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-prio3histogram-with-aggrega" class="internal xref">Prio3Histogram with Aggregator-DP</a></p>
 </li>
                 </ul>
 </li>
@@ -1308,46 +1308,49 @@ both Clients and Aggregators may participate in generating the noise.<a href="#s
 in DAP. It does so in the following stages:<a href="#section-1-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-8">
 <li id="section-1-8.1">
-          <a href="#overview" class="auto internal xref">Section 3</a> describes the notion(s) of DP that are compatible with DAP and
+          <p id="section-1-8.1.1"><a href="#overview" class="auto internal xref">Section 3</a> describes the notion(s) of DP that are compatible with DAP and
 provides a systematization of applicable DP policies from the literature.
 Security is defined in a few different "trust models" in which we assume
 that some fraction of the parties execute the protocol honestly. Of course
 in reality, whether such assumptions hold is usually outside of our control.
 Thus our goal is to design DP policies that still provide some degree of
-protection in more pessimistic trust models.<a href="#section-1-8.1" class="pilcrow">¶</a>
+protection in more pessimistic trust models.<a href="#section-1-8.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-8.2">
-          <a href="#mechanisms" class="auto internal xref">Section 4</a> specifies various mechanisms required for building DP
+          <p id="section-1-8.2.1"><a href="#mechanisms" class="auto internal xref">Section 4</a> specifies various mechanisms required for building DP
 systems, including algorithms for sampling from discrete Laplace and
-Gaussian distributions.<a href="#section-1-8.2" class="pilcrow">¶</a>
+Gaussian distributions.<a href="#section-1-8.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-8.3">
-          <a href="#policies" class="auto internal xref">Section 5</a> defines DP policies and specifies concrete policies for
+          <p id="section-1-8.3.1"><a href="#policies" class="auto internal xref">Section 5</a> defines DP policies and specifies concrete policies for
 endowing VDAFs in <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span> with DP. [TODO: And other drafts, once they
 appear.] [CP: This API may not be compatible with all DP polices we might
-want to implement.]<a href="#section-1-8.3" class="pilcrow">¶</a>
+want to implement.]<a href="#section-1-8.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-8.4">
-          <a href="#dp-in-dap" class="auto internal xref">Section 5.1</a> specifies the integration of DP policies from the previous
+          <p id="section-1-8.4.1"><a href="#dp-in-dap" class="auto internal xref">Section 5.1</a> specifies the integration of DP policies from the previous
 section into DAP. In particular, it describes changes to the Client,
 Aggregator, and Collector behavior required to implement the policy. [CP:
 This integration might not be compatible with all DP policies we might
-want to implement.]<a href="#section-1-8.4" class="pilcrow">¶</a>
+want to implement.]<a href="#section-1-8.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <p id="section-1-9">The following considerations are out-of-scope for this document:<a href="#section-1-9" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-10">
-<li id="section-1-10.1">DP policies have a few parameters that need to be tuned in order to meet the
+<li id="section-1-10.1">
+          <p id="section-1-10.1.1">DP policies have a few parameters that need to be tuned in order to meet the
 privacy/utility tradeoff required by the application. This document provides
-no guidance for this process.<a href="#section-1-10.1" class="pilcrow">¶</a>
+no guidance for this process.<a href="#section-1-10.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-1-10.2">This document describes a particular class of narrowly-scoped DP policies.
-Other, more sophisticated policies are possible. [TODO: Add citations.]<a href="#section-1-10.2" class="pilcrow">¶</a>
+        <li id="section-1-10.2">
+          <p id="section-1-10.2.1">This document describes a particular class of narrowly-scoped DP policies.
+Other, more sophisticated policies are possible. [TODO: Add citations.]<a href="#section-1-10.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-1-10.3">The mechanisms described in <a href="#mechanisms" class="auto internal xref">Section 4</a> are intended for use beyond
+        <li id="section-1-10.3">
+          <p id="section-1-10.3.1">The mechanisms described in <a href="#mechanisms" class="auto internal xref">Section 4</a> are intended for use beyond
 DAP/VDAF. However, this document does not describe general-purpose DP
 policies; those described in <a href="#policies" class="auto internal xref">Section 5</a> are tailored to specific VDAFs or
-classes of VDAFs.<a href="#section-1-10.3" class="pilcrow">¶</a>
+classes of VDAFs.<a href="#section-1-10.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
@@ -1532,16 +1535,19 @@ random seed into a sample from a given distribution.<a href="#section-4-1" class
 DP guarantee that it is supposed to provide.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">We also expect DP mechanisms to contain the following functionalities:<a href="#section-4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4-4.1">Add noise to a piece of input data (i.e. a measurement or an aggregate share).
+<li class="normal" id="section-4-4.1">
+          <p id="section-4-4.1.1">Add noise to a piece of input data (i.e. a measurement or an aggregate share).
 Some DP mechanisms apply noise based on the input data, e.g. randomized
 response mechanism <a href="#rr" class="auto internal xref">Section 4.3</a> flips the bit at each dimension, which means the
-noised output depends on the input.<a href="#section-4-4.1" class="pilcrow">¶</a>
+noised output depends on the input.<a href="#section-4-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-4-4.2">Sample noise with the DP mechanism.<a href="#section-4-4.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-4-4.2">
+          <p id="section-4-4.2.1">Sample noise with the DP mechanism.<a href="#section-4-4.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-4-4.3">Debias the noised data. Note that not all noise will need this functionality.
+        <li class="normal" id="section-4-4.3">
+          <p id="section-4-4.3.1">Debias the noised data. Note that not all noise will need this functionality.
 Some DP mechanisms will need this functionality, for example, randomized
-response mechanisms have a debiasing step that removes bias.<a href="#section-4-4.3" class="pilcrow">¶</a>
+response mechanisms have a debiasing step that removes bias.<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-5">Therefore, we define three methods for an interface <code>DpMechanism</code>:<a href="#section-4-5" class="pilcrow">¶</a></p>
@@ -1619,14 +1625,17 @@ class DpMechanism:
 <p id="section-5-1">The section defines a generic interface for DP policies for VDAFs.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">We will define an interface <code>DpPolicy</code> that composes the following:<a href="#section-5-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-3.1">An optional Client-DP mechanism that adds noise to Clients' measurements.<a href="#section-5-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5-3.1">
+          <p id="section-5-3.1.1">An optional Client-DP mechanism that adds noise to Clients' measurements.<a href="#section-5-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-3.2">An optional Aggregator-DP mechanism that adds noise to an Aggregator's
+        <li class="normal" id="section-5-3.2">
+          <p id="section-5-3.2.1">An optional Aggregator-DP mechanism that adds noise to an Aggregator's
 aggregate share, based on the number of measurements, and the minimum
-batch size.<a href="#section-5-3.2" class="pilcrow">¶</a>
+batch size.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-3.3">An optional debiasing step that removes the bias in DP mechanisms (i.e.
-<code>DpMechanism.debias</code>).<a href="#section-5-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-3.3">
+          <p id="section-5-3.3.1">An optional debiasing step that removes the bias in DP mechanisms (i.e.
+<code>DpMechanism.debias</code>).<a href="#section-5-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-5-4">The composition of Client- and Aggregator-DP mechanisms defines the DP
@@ -1703,10 +1712,10 @@ bit vector with exactly one bit set. We describe two policies for this use
 case: one which targets the OAMC trust model and provides optimal utility; and
 another which targets the more stringent OAOC trust model and provides
 sub-optimal utility.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<div id="prio3histogram-with-client-noise">
+<div id="prio3histogram-with-client-dp">
 <section id="section-6.1.1">
           <h4 id="name-prio3histogram-with-client-">
-<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-prio3histogram-with-client-" class="section-name selfRef">Prio3Histogram with Client Noise</a>
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-prio3histogram-with-client-" class="section-name selfRef">Prio3Histogram with Client-DP</a>
           </h4>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1.1-1.1">
@@ -1799,14 +1808,14 @@ it in <a href="#rr" class="auto internal xref">Section 4.3</a>.<a href="#section
           </ul>
 </section>
 </div>
-<div id="prio3histogram-with-aggregator-noise">
+<div id="prio3histogram-with-aggregator-dp">
 <section id="section-6.1.2">
           <h4 id="name-prio3histogram-with-aggrega">
-<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-prio3histogram-with-aggrega" class="section-name selfRef">Prio3Histogram with Aggregator Noise</a>
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-prio3histogram-with-aggrega" class="section-name selfRef">Prio3Histogram with Aggregator-DP</a>
           </h4>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1.2-1.1">
-              <p id="section-6.1.2-1.1.1">TODO Describe a policy that is compatilbe with Prio3Histogram and that
+              <p id="section-6.1.2-1.1.1">TODO Describe a policy that is compatible with Prio3Histogram and that
 targets the OAOC trust model.<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -1897,6 +1906,7 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
       <h2 id="name-references">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-9.1">
         <h3 id="name-normative-references">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1928,6 +1938,8 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-9.2">
         <h3 id="name-informative-references">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1979,6 +1991,7 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="contributors">
 <section id="appendix-A">
@@ -2069,14 +2082,15 @@ the gap between actual number of Clients and minimum batch size.<a href="#append
 <p id="appendix-B.4-1">There are various types of DP guarantees and budgets that can be enforced.
 Many applications need to query the Client data multiple times, for example:<a href="#appendix-B.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-2.1">Federated machine learning applications require multiple aggregates to be
+<li class="normal" id="appendix-B.4-2.1">
+            <p id="appendix-B.4-2.1.1">Federated machine learning applications require multiple aggregates to be
 computed over the same underlying data, but with different machine learning
-model parameters.<a href="#appendix-B.4-2.1" class="pilcrow">¶</a>
+model parameters.<a href="#appendix-B.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.4-2.2">
-            <span>[<a href="#MJTBp22" class="cite xref">MJTBp22</a>]</span> describes an interactive approach of building histograms over
+            <p id="appendix-B.4-2.2.1"><span>[<a href="#MJTBp22" class="cite xref">MJTBp22</a>]</span> describes an interactive approach of building histograms over
 multiple iterations, and Section 4.3 describes a way to track Client-side
-budget when the Client data is queried multiple times.<a href="#appendix-B.4-2.2" class="pilcrow">¶</a>
+budget when the Client data is queried multiple times.<a href="#appendix-B.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <ul class="normal ulEmpty">
@@ -2092,9 +2106,11 @@ enforce the privacy budget.<a href="#appendix-B.4-4" class="pilcrow">¶</a></p>
 DP composition theorems. In the various example DP guarantees below,
 we describe the following:<a href="#appendix-B.4-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-6.1">A formal definition of the DP guarantee.<a href="#appendix-B.4-6.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.4-6.1">
+            <p id="appendix-B.4-6.1.1">A formal definition of the DP guarantee.<a href="#appendix-B.4-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-6.2">Composition theorems that apply to the DP guarantee.<a href="#appendix-B.4-6.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.4-6.2">
+            <p id="appendix-B.4-6.2.1">Composition theorems that apply to the DP guarantee.<a href="#appendix-B.4-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

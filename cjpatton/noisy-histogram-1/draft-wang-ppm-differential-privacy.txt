@@ -4,8 +4,8 @@
 
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
-Intended status: Informational                         25 September 2023
-Expires: 28 March 2024
+Intended status: Informational                           10 October 2023
+Expires: 12 April 2024
 
 
                 Differential Privacy Mechanisms for DAP
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2024.
+   This Internet-Draft will expire on 12 April 2024.
 
 Copyright Notice
 
@@ -83,8 +83,8 @@ Table of Contents
      5.1.  Executing DP Policies in DAP
    6.  Use Cases
      6.1.  Histograms
-       6.1.1.  Prio3Histogram with Client Noise
-       6.1.2.  Prio3Histogram with Aggregator Noise
+       6.1.1.  Prio3Histogram with Client-DP
+       6.1.2.  Prio3Histogram with Aggregator-DP
    7.  Security Considerations
    8.  IANA Considerations
    9.  References
@@ -484,7 +484,7 @@ Table of Contents
    and provides optimal utility; and another which targets the more
    stringent OAOC trust model and provides sub-optimal utility.
 
-6.1.1.  Prio3Histogram with Client Noise
+6.1.1.  Prio3Histogram with Client-DP
 
       TODO Figure out if there is a way to endow Prio3Histogram with
       local DP without modifying it.
@@ -573,9 +573,9 @@ Table of Contents
       TODO(issue #10): replace rr_mechanism once we have concretely
       defined it in Section 4.3.
 
-6.1.2.  Prio3Histogram with Aggregator Noise
+6.1.2.  Prio3Histogram with Aggregator-DP
 
-      TODO Describe a policy that is compatilbe with Prio3Histogram and
+      TODO Describe a policy that is compatible with Prio3Histogram and
       that targets the OAOC trust model.
 
    class Prio3HistogramWithDiscreteGaussian:
