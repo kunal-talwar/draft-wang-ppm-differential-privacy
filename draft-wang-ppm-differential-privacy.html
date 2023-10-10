@@ -1033,7 +1033,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Chen, et al.</td>
-<td class="center">Expires 5 April 2024</td>
+<td class="center">Expires 12 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-03" class="published">3 October 2023</time>
+<time datetime="2023-10-10" class="published">10 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-05">5 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-12">12 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1109,7 +1109,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1187,20 +1187,25 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-dp-policies-for-vdafs" class="internal xref">DP Policies for VDAFs</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-concrete-instantiations-of-" class="internal xref">Concrete Instantiations of DP Policies with VDAFs</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-prio3sumvec-bits-1-with-ran" class="internal xref">Prio3SumVec, <code>bits = 1</code>, with Randomized Response Client-DP</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
-                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-prio3histogram-with-discret" class="internal xref">Prio3Histogram with Discrete Gaussian</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-executing-dp-policies-in-da" class="internal xref">Executing DP Policies in DAP</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-executing-dp-policies-in-da" class="internal xref">Executing DP Policies in DAP</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-use-cases" class="internal xref">Use Cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-histograms" class="internal xref">Histograms</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-prio3histogram-with-client-" class="internal xref">Prio3Histogram with Client-DP</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-prio3histogram-with-aggrega" class="internal xref">Prio3Histogram with Aggregator-DP</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1333,7 +1338,7 @@ appear.] [CP: This API may not be compatible with all DP polices we might
 want to implement.]<a href="#section-1-8.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-8.4">
-          <p id="section-1-8.4.1"><a href="#dp-in-dap" class="auto internal xref">Section 6</a> specifies the integration of DP policies from the previous
+          <p id="section-1-8.4.1"><a href="#dp-in-dap" class="auto internal xref">Section 5.1</a> specifies the integration of DP policies from the previous
 section into DAP. In particular, it describes changes to the Client,
 Aggregator, and Collector behavior required to implement the policy. [CP:
 This integration might not be compatible with all DP policies we might
@@ -1688,32 +1693,66 @@ class DpPolicy:
         pass
 </pre><a href="#section-5-5" class="pilcrow">¶</a>
 </div>
-<div id="concrete-instantiations-of-dp-policies-with-vdafs">
+<div id="dp-in-dap">
 <section id="section-5.1">
-        <h3 id="name-concrete-instantiations-of-">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-concrete-instantiations-of-" class="section-name selfRef">Concrete Instantiations of DP Policies with VDAFs</a>
+        <h3 id="name-executing-dp-policies-in-da">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-executing-dp-policies-in-da" class="section-name selfRef">Executing DP Policies in DAP</a>
         </h3>
-<div id="prio3sumvec-bits-1-with-randomized-response-client-dp">
-<section id="section-5.1.1">
-          <h4 id="name-prio3sumvec-bits-1-with-ran">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-prio3sumvec-bits-1-with-ran" class="section-name selfRef">Prio3SumVec, <code>bits = 1</code>, with Randomized Response Client-DP</a>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-5.1-1.1">
+            <p id="section-5.1-1.1.1">TODO: Specify integration of a <code>DpPolicy</code> into DAP.<a href="#section-5.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="use-cases">
+<section id="section-6">
+      <h2 id="name-use-cases">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
+      </h2>
+<div id="histograms">
+<section id="section-6.1">
+        <h3 id="name-histograms">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-histograms" class="section-name selfRef">Histograms</a>
+        </h3>
+<p id="section-6.1-1">Many applications require aggregating histograms in which each Client submits a
+bit vector with exactly one bit set. We describe two policies for this use
+case: one which targets the OAMC trust model and provides optimal utility [JC:
+Prove this with numbers]; and another which targets the more stringent OAOC
+trust model and provides sub-optimal utility.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<div id="prio3histogram-with-client-dp">
+<section id="section-6.1.1">
+          <h4 id="name-prio3histogram-with-client-">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-prio3histogram-with-client-" class="section-name selfRef">Prio3Histogram with Client-DP</a>
           </h4>
-<p id="section-5.1.1-1">Client-DP allows Clients to protect their privacy by adding noise to their
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.1-1.1">
+              <p id="section-6.1.1-1.1.1">TODO Figure out if there is a way to endow Prio3Histogram with local DP
+without modifying it.<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-1.1.2">If so, specify a policy that targets OAMC trust model.<a href="#section-6.1.1-1.1.2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-1.1.3">If not, decide whether to use Prio3SumVec or specify a Prio3 variant that
+suffices for https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/287 and
+specify a policy for it.<a href="#section-6.1.1-1.1.3" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.1.1-2">Client-DP allows Clients to protect their privacy by adding noise to their
 measurements directly, as described in <a href="#levels" class="auto internal xref">Appendix B.2</a>. Analyses (<span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and
 <span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>) have shown that the central DP guarantee can also be amplified
-by aggregating Clients' measurements with Client-DP.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">For this particular instantiation of <code>Prio3SumVec</code> with <code>bits = 1</code>, i.e. each
+by aggregating Clients' measurements with Client-DP.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-3">For this particular instantiation of <code>Prio3SumVec</code> with <code>bits = 1</code>, i.e. each
 value in the vector is either a 0 or 1, we can apply randomized response <a href="#rr" class="auto internal xref">Section 4.3</a>
 Client-DP to Clients' measurements, with a configured Client-DP with <code>EPSILON_0</code>
-parameter.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3">The DP guarantee is met, as long as there are at least "minimum batch size"
+parameter.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-4">The DP guarantee is met, as long as there are at least "minimum batch size"
 number of Clients, each of which adds the randomized response Client-DP.
 However, in case the minimum batch size is not met when Aggregators want to
 output their aggregate shares, each Aggregator can sample the same randomized
 response Client-DP on the "missing" Clients with zero-hot vectors, so the
 central DP guarantee can still be satisfied, based on the privacy amplification
-analysis in <span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and <span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.1.1-4">
+analysis in <span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and <span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1.1-5">
 <pre>
 class Prio3SumVecWithRandomizedResponse:
     Measurement = Vec[Unsigned]
@@ -1769,24 +1808,28 @@ class Prio3SumVecWithRandomizedResponse:
             meas_count + \
             num_aggregators * (min_batch_size - meas_count)
         return self.rr_mechanism.debias(agg_result, debiasing_count)
-</pre><a href="#section-5.1.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.1.1-5" class="pilcrow">¶</a>
 </div>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-5.1.1-5.1">
-              <p id="section-5.1.1-5.1.1">TODO(issue #10): replace <code>rr_mechanism</code> once we have concretely defined
-it in <a href="#rr" class="auto internal xref">Section 4.3</a>.<a href="#section-5.1.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1.1-6.1">
+              <p id="section-6.1.1-6.1.1">TODO(issue #10): replace <code>rr_mechanism</code> once we have concretely defined
+it in <a href="#rr" class="auto internal xref">Section 4.3</a>.<a href="#section-6.1.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
-<div id="prio3histogram-with-discrete-gaussian">
-<section id="section-5.1.2">
-          <h4 id="name-prio3histogram-with-discret">
-<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-prio3histogram-with-discret" class="section-name selfRef">Prio3Histogram with Discrete Gaussian</a>
+<div id="prio3histogram-with-aggregator-dp">
+<section id="section-6.1.2">
+          <h4 id="name-prio3histogram-with-aggrega">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-prio3histogram-with-aggrega" class="section-name selfRef">Prio3Histogram with Aggregator-DP</a>
           </h4>
-<p id="section-5.1.2-1">For Prio3Histogram, we will apply an Aggregator-only DP mechanism,
-that is implemented with discrete Gaussian.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.1.2-2">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.2-1.1">
+              <p id="section-6.1.2-1.1.1">TODO Describe a policy that is compatible with Prio3Histogram and that
+targets the OAOC trust model.<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<div class="alignLeft art-text artwork" id="section-6.1.2-2">
 <pre>
 class Prio3HistogramWithDiscreteGaussian:
     Measurement = Unsigned
@@ -1839,30 +1882,18 @@ class Prio3HistogramWithDiscreteGaussian:
         No debiasing.
         """
         return agg_result
-</pre><a href="#section-5.1.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-6.1.2-2" class="pilcrow">¶</a>
 </div>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-5.1.2-3.1">
-              <p id="section-5.1.2-3.1.1">TODO(issue #10): replace <code>dgauss_mechanism</code> once we have concretely defined
-it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a href="#section-5.1.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1.2-3.1">
+              <p id="section-6.1.2-3.1.1">TODO(issue #10): replace <code>dgauss_mechanism</code> once we have concretely defined
+it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a href="#section-6.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 </section>
 </div>
-</section>
-</div>
-<div id="dp-in-dap">
-<section id="section-6">
-      <h2 id="name-executing-dp-policies-in-da">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-executing-dp-policies-in-da" class="section-name selfRef">Executing DP Policies in DAP</a>
-      </h2>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6-1.1">
-          <p id="section-6-1.1.1">TODO: Specify integration of a <code>DpPolicy</code> into DAP.<a href="#section-6-1.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
 </section>
 </div>
 <div id="security-considerations">

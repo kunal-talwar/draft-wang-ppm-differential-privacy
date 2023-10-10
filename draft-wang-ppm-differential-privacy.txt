@@ -5,10 +5,10 @@
 Privacy Preserving Measurement                                   J. Chen
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 5 April 2024                                         Cloudflare
+Expires: 12 April 2024                                        Cloudflare
                                                                  S. Wang
                                                               Apple Inc.
-                                                          3 October 2023
+                                                         10 October 2023
 
 
                 Differential Privacy Mechanisms for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 April 2024.
+   This Internet-Draft will expire on 12 April 2024.
 
 Copyright Notice
 
@@ -83,11 +83,11 @@ Table of Contents
      4.2.  Discrete Gaussian
      4.3.  Randomized Response
    5.  DP Policies for VDAFs
-     5.1.  Concrete Instantiations of DP Policies with VDAFs
-       5.1.1.  Prio3SumVec, bits = 1, with Randomized Response
-               Client-DP
-       5.1.2.  Prio3Histogram with Discrete Gaussian
-   6.  Executing DP Policies in DAP
+     5.1.  Executing DP Policies in DAP
+   6.  Use Cases
+     6.1.  Histograms
+       6.1.1.  Prio3Histogram with Client-DP
+       6.1.2.  Prio3Histogram with Aggregator-DP
    7.  Security Considerations
    8.  IANA Considerations
    9.  References
@@ -182,7 +182,7 @@ Table of Contents
        they appear.]  [CP: This API may not be compatible with all DP
        polices we might want to implement.]
 
-   4.  Section 6 specifies the integration of DP policies from the
+   4.  Section 5.1 specifies the integration of DP policies from the
        previous section into DAP.  In particular, it describes changes
        to the Client, Aggregator, and Collector behavior required to
        implement the policy.  [CP: This integration might not be
@@ -473,9 +473,31 @@ Table of Contents
           """
           pass
 
-5.1.  Concrete Instantiations of DP Policies with VDAFs
+5.1.  Executing DP Policies in DAP
 
-5.1.1.  Prio3SumVec, bits = 1, with Randomized Response Client-DP
+      TODO: Specify integration of a DpPolicy into DAP.
+
+6.  Use Cases
+
+6.1.  Histograms
+
+   Many applications require aggregating histograms in which each Client
+   submits a bit vector with exactly one bit set.  We describe two
+   policies for this use case: one which targets the OAMC trust model
+   and provides optimal utility [JC: Prove this with numbers]; and
+   another which targets the more stringent OAOC trust model and
+   provides sub-optimal utility.
+
+6.1.1.  Prio3Histogram with Client-DP
+
+      TODO Figure out if there is a way to endow Prio3Histogram with
+      local DP without modifying it.
+
+      If so, specify a policy that targets OAMC trust model.
+
+      If not, decide whether to use Prio3SumVec or specify a Prio3
+      variant that suffices for https://github.com/cfrg/draft-irtf-cfrg-
+      vdaf/issues/287 and specify a policy for it.
 
    Client-DP allows Clients to protect their privacy by adding noise to
    their measurements directly, as described in Appendix B.2.  Analyses
@@ -555,10 +577,10 @@ Table of Contents
       TODO(issue #10): replace rr_mechanism once we have concretely
       defined it in Section 4.3.
 
-5.1.2.  Prio3Histogram with Discrete Gaussian
+6.1.2.  Prio3Histogram with Aggregator-DP
 
-   For Prio3Histogram, we will apply an Aggregator-only DP mechanism,
-   that is implemented with discrete Gaussian.
+      TODO Describe a policy that is compatible with Prio3Histogram and
+      that targets the OAOC trust model.
 
    class Prio3HistogramWithDiscreteGaussian:
        Measurement = Unsigned
@@ -614,10 +636,6 @@ Table of Contents
 
       TODO(issue #10): replace dgauss_mechanism once we have concretely
       defined it in Section 4.2.
-
-6.  Executing DP Policies in DAP
-
-      TODO: Specify integration of a DpPolicy into DAP.
 
 7.  Security Considerations
 
