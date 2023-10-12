@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-05T00:52:42.709686+00:00",
+  "timestamp": "2023-10-12T00:50:49.007452+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -3204,24 +3204,26 @@
       "id": "PR_kwDOJ7sZWc5bKis_",
       "title": "Create skeleton for noisy histograms use case",
       "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-09-25T20:42:41Z",
-      "updatedAt": "2023-09-29T22:25:49Z",
+      "updatedAt": "2023-10-10T18:30:15Z",
       "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "baseRefName": "main",
-      "baseRefOid": "8183bfa36913b04022251b6851af83553ed88013",
+      "baseRefOid": "5334a6462359b4f57463ee6b495245eb4b8dd978",
       "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
       "headRefName": "cjpatton/noisy-histogram-1",
-      "headRefOid": "8bf742cf86e9ef1884b573dc6c2cffbce257ed70",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "81c4509459a19f56eceffd4c0c3afb97ecae5559",
+      "closedAt": "2023-10-10T18:30:15Z",
+      "mergedAt": "2023-10-10T18:30:15Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "1592b0352b60b1ca05723a3b5253029927ea8bb1"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3302,6 +3304,26 @@
           "createdAt": "2023-09-29T22:25:49Z",
           "updatedAt": "2023-09-29T22:25:49Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5jdCpP",
+          "commit": {
+            "abbreviatedOid": "580d537"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-10T18:27:29Z",
+          "updatedAt": "2023-10-10T18:27:29Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Good call, I've added an author note with this suggestion. (Author note: `[JC: ...]`)",
+              "createdAt": "2023-10-10T18:27:29Z",
+              "updatedAt": "2023-10-10T18:27:29Z"
+            }
+          ]
         }
       ]
     },
