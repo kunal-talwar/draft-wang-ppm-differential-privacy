@@ -5,10 +5,10 @@
 Privacy Preserving Measurement                                   J. Chen
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 19 April 2024                                        Cloudflare
+Expires: 20 April 2024                                        Cloudflare
                                                                  S. Wang
                                                               Apple Inc.
-                                                         17 October 2023
+                                                         18 October 2023
 
 
                 Differential Privacy Mechanisms for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2024.
+   This Internet-Draft will expire on 20 April 2024.
 
 Copyright Notice
 
