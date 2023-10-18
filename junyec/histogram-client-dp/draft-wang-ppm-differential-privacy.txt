@@ -5,10 +5,10 @@
 Privacy Preserving Measurement                                   J. Chen
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 19 April 2024                                        Cloudflare
+Expires: 20 April 2024                                        Cloudflare
                                                                  S. Wang
                                                               Apple Inc.
-                                                         17 October 2023
+                                                         18 October 2023
 
 
                 Differential Privacy Mechanisms for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2024.
+   This Internet-Draft will expire on 20 April 2024.
 
 Copyright Notice
 
@@ -217,6 +217,10 @@ Table of Contents
    Let exp(EPSILON) denote raising the numeric constant e to the power
    of EPSILON.
 
+   Under Central Limit Theorem (CLT), the sum of a large number of
+   independently and identically distributed random variables
+   approximates a normal distribution, or Gaussian distribution.
+
 3.  Security Goals and Trust Model
 
 3.1.  Differential Privacy
@@ -378,30 +382,34 @@ Table of Contents
    Therefore, we define three methods for an interface DpMechanism:
 
   class DpMechanism:
-      # The data type applicable to this `DpMechanism`. Here we are
-      # assuming the data type doesn't change before and after noise.
+      # The data type applicable to this `DpMechanism`. The type is the
+      # same for the noised data and the un-noised data.
       DataType = None
+      # Debiased data type after removing bias added by the noise. For
+      # most of the mechanisms, `DebiasedDataType == DataType`.
       DebiasedDataType = None
 
       def add_noise(self, data: DataType) -> DataType:
           """Add noise to a piece of input data. """
           raise NotImplementedError()
 
-      def sample_noise(self, num_reps: int, dimension: int) -> DataType:
+      def sample_noise(self, dimension: int) -> DataType:
           """
-          Sample noise for `num_reps` number of times, with `dimension`.
+          Sample noise with the initialized `DpMechanism`. `dimension`
+          is used to determine the length of the output if `DataType` is
+          a list.
           """
           raise NotImplementedError()
 
       def debias(self,
-                 agg: DataType,
+                 data: DataType,
                  meas_count: int) -> DebiasedDataType:
           """
-          Debias the data due to the added noise.
-          This doesn't apply to all noises. Some Client-DP mechanisms
-          need this functionality.
+          Debias the data due to the added noise, based on the number of
+          measurements `meas_count`. This doesn't apply to all DP
+          mechanisms. Some Client-DP mechanisms need this functionality.
           """
-          raise NotImplementedError()
+          return data
 
 4.1.  Discrete Laplace
 
@@ -413,79 +421,71 @@ Table of Contents
 
 4.3.  Binary Randomized Response
 
-   The binary randomized response mechanism specified here aims to
-   provide the DP guarantee at the Client level.  It is the same as the
-   one specified in Appendix C.1 of [MJTB_22].
+   The binary randomized response mechanism specified in Appendix C.1 of
+   [MJTB_22] is EPSILON_0-DP at the Client level, in the deletion-DP
+   model (Definition II.4 of [EFMR_20]).
 
-   To apply noise at Client side, the Client flips a coin at each
-   coordinate of its vector.  If the coin turns out to be a head, the
-   Client will change the value x at that coordinate to 1 - x.  The
-   probability of the coin giving a head is 1 / (e^(EPSILON_0) + 1),
-   where EPSILON_0 provides the pure EPSILON_0-DP guarantee, in the
-   deletion-DP model (Definition II.4 of [EFMR_20]), which ensures that
-   it is impossible to confidently determine whether an individual
-   contributed data to the final aggregate result.
+   Binary randomized response's input is a single bit x.  The bit is
+   flipped to 1 - x with probability 1 / (exp(EPSILON_0) + 1).
 
-   The final aggregate result is obtained by "debiasing" the aggregation
-   of the noisy Client measurements.  It is expressed as a vector of
-   floats, because the debiasing operations involve floating point
-   arithmetics.
+   We generalize this noise by applying it independently at all
+   coordinates of a Client's bit vector.  Under OAMC trust model, it is
+   proven in Appendix C.1.3 of [MJTB_22] that we get good (EPSILON,
+   DELTA)-DP in the replacement-DP model, by aggregating a batch of
+   noisy Client measurements, each of which is a bit vector with exactly
+   one bit set, and is noised with binary randomized response at all
+   coordinates.  The final aggregate result needs to be "debiased" due
+   to the noise added by the Clients, and is expressed as a vector of
+   floats, because of floating point arithmetic.
 
    Since the noise generated by each Client at each coordinate is
-   independent, and based on a coin flip with probability 1 /
-   (e^(EPSILON_0) + 1), the noise generated by n number of Clients at
-   each coordinate is a binomial distribution.  By Central Limit Theorem
-   (CLT), as n grows, the noise distribution approximates a Gaussian
-   distribution, with standard deviation sqrt(n * e^(EPSILON_0) /
-   (e^(EPSILON_0) - 1)^2), as proved by Theorem C.2 of [MJTB_22].
+   independent, and as the number of Clients n grows, the noise
+   distribution at each coordinate approximates a Gaussian distribution,
+   with standard deviation sqrt(n * exp(EPSILON_0) / (exp(EPSILON_0) -
+   1)^2), as proved by Theorem C.2 of [MJTB_22].
 
       TODO: We need to align with Xof specified in the VDAF draft.
       Currently we get away with just using random.random() in python to
       make the randomized response sampler functional.  TODO: We could
       make the sampler more efficient if we use binomial.
 
-  import random
+   import random
 
-  class BinaryRandomizedResponse(DpMechanism):
-      DataType = list[int]
-      # Debiasing produces an array of floats.
-      DebiasedDataType = list[float]
+   class BinaryRandomizedResponse(DpMechanism):
+       DataType = list[int]
+       # Debiasing produces an array of floats.
+       DebiasedDataType = list[float]
 
-      def __init__(self, eps0: float):
-          self.eps0 = eps0
-          self.p = 1.0 / (math.exp(eps0) + 1.0)
+       def __init__(self, eps0: float):
+           self.eps0 = eps0
+           self.p = 1.0 / (math.exp(eps0) + 1.0)
 
-      def add_noise(self, data: DataType) -> DataType:
-          # Apply binary randomized response at each coordinate, based
-          # on Appendix C.1.1 of {{MJTB+22}}.
-          return list(map(
-              lambda x: 1 - x if self.coin_flip() else x,
-              data
-          ))
+       def add_noise(self, data: DataType) -> DataType:
+           # Apply binary randomized response at each coordinate, based
+           # on Appendix C.1.1 of {{MJTB+22}}.
+           return list(map(
+               lambda x: 1 - x if self.coin_flip() else x,
+               data
+           ))
 
-      def sample_noise(self, num_reps: int, dimension: int) -> DataType:
-          # Pretend there are `num_reps` zeroed bit vectors with length
-          # equal to `dimension`, and we apply randomized response on
-          # each of them and aggregate them.
-          return [
-              sum(self.coin_flip() for i in range(num_reps))
-              for coord in range(dimension)
-          ]
+       def sample_noise(self, dimension: int) -> DataType:
+           # Sample binary randomized response at each coordinate on an
+           # all zero vector.
+           return [int(self.coin_flip()) for coord in range(dimension)]
 
-      def debias(self,
-                 agg: DataType,
-                 meas_count: int) -> DebiasedDataType:
-          # Debias the aggregated histogram based on Appendix C.1.2 of
-          # {{MJTB+22}}.
-          exp_eps = math.exp(self.eps0)
-          return list(map(
-              lambda x: (x * (exp_eps + 1) / (exp_eps - 1) -
-                         meas_count / (exp_eps - 1)),
-              agg
-          ))
+       def debias(self,
+                  data: DataType,
+                  meas_count: int) -> DebiasedDataType:
+           # Debias the data based on Appendix C.1.2 of {{MJTB+22}}.
+           exp_eps = math.exp(self.eps0)
+           return list(map(
+               lambda x: (x * (exp_eps + 1) / (exp_eps - 1) -
+                          meas_count / (exp_eps - 1)),
+               data
+           ))
 
-      def coin_flip(self):
-          return random.random() < p
+       def coin_flip(self):
+           return random.random() < self.p
 
 5.  DP Policies for VDAFs
 
@@ -504,51 +504,47 @@ Table of Contents
       (i.e.  DpMechanism.debias).
 
    The composition of Client- and Aggregator-DP mechanisms defines the
-   DP policy for a VDAF, and enforces the target central DP guarantee.
+   DP policy for a VDAF, and enforces the DP guarantee.
 
-   class DpPolicy:
-       # Client measurement type.
-       Measurement = None
-       # Aggregate share type, owned by an Aggregator.
-       AggShare = None
-       # Aggregate result type, unsharded result from all Aggregators.
-       AggResult = None
-       # Debiased aggregate result type.
-       DebiasedAggResult = None
+  class DpPolicy:
+      # Client measurement type.
+      Measurement = None
+      # Aggregate share type, owned by an Aggregator.
+      AggShare = None
+      # Aggregate result type, unsharded result from all Aggregators.
+      AggResult = None
+      # Debiased aggregate result type.
+      DebiasedAggResult = None
 
-       def add_noise_to_measurement(self,
-                                    meas: Measurement,
-                                    ) -> Measurement:
-           """
-           Add noise to measurement, if required by the Client-DP
-           mechanism.
-           """
-           raise NotImplementedError()
+      def add_noise_to_measurement(self,
+                                   meas: Measurement,
+                                   ) -> Measurement:
+          """
+          Add noise to measurement, if required by the Client-DP
+          mechanism. The default implementation is to do nothing.
+          """
+          return meas
 
-       def add_noise_to_agg_share(self,
-                                  agg_share: AggShare,
-                                  meas_count: int,
-                                  min_batch_size: int,
-                                  ) -> AggShare:
-           """
-           Add noise to aggregate share, if required by the
-           Aggregator-DP mechanism.
-           """
-           raise NotImplementedError()
+      def add_noise_to_agg_share(self,
+                                 agg_share: AggShare,
+                                 ) -> AggShare:
+          """
+          Add noise to aggregate share, if required by the Aggregator-DP
+          mechanism. The default implementation is to do nothing.
+          """
+          return agg_share
 
-       def debias_agg_result(self,
-                             agg_result: AggResult,
-                             meas_count: int,
-                             min_batch_size: int,
-                             num_aggregators: int,
-                             ) -> DebiasedAggResult:
-           """
-           Debias aggregate result, if any of the Client- or
-           Aggregator-DP mechanism requires this operation, based on
-           the number of measurements, minimum batch size, and the
-           number of Aggregators.
-           """
-           raise NotImplementedError()
+      def debias_agg_result(self,
+                            agg_result: AggResult,
+                            meas_count: int,
+                            ) -> DebiasedAggResult:
+          """
+          Debias aggregate result, if any of the Client- or
+          Aggregator-DP mechanism requires this operation, based on the
+          number of measurements `meas_count`. The default
+          implementation is to do nothing.
+          """
+          return agg_result
 
 5.1.  Executing DP Policies with VDAFs
 
@@ -558,7 +554,6 @@ Table of Contents
  def run_dp_policy_with_vdaf(
      dp_policy: DpPolicy,
      Vdaf: Vdaf,
-     min_batch_size: int,
      agg_param: Vdaf.AggParam,
      measurements: list[DpPolicy.Measurement],
  ):
@@ -623,9 +618,8 @@ Table of Contents
          agg_share_j = Vdaf.aggregate(agg_param, out_shares_j)
          # Each Aggregator independently adds noise to its aggregate
          # share.
-         noised_agg_share_j = dp_policy.add_noise_to_agg_share(
-             agg_share_j, num_measurements, min_batch_size,
-         )
+         noised_agg_share_j = \
+             dp_policy.add_noise_to_agg_share(agg_share_j)
          agg_shares.append(noised_agg_share_j)
 
      # Collector unshards the aggregate.
@@ -633,7 +627,7 @@ Table of Contents
                                num_measurements)
      # Debias aggregate result.
      debiased_agg_result = dp_policy.debias_agg_result(
-         agg_result, num_measurements, min_batch_size, Vdaf.SHARES
+         agg_result, num_measurements
      )
      return debiased_agg_result
 
@@ -647,42 +641,45 @@ Table of Contents
 
    Many applications require aggregating histograms in which each Client
    submits a bit vector with exactly one bit set, also known as, "one-
-   hot vector".  We describe two policies that achieve central (EPSILON,
-   DELTA)-DP on this use case: one which uses only Client-DP mechanism
-   and targets the OAMC trust model, and another which uses only
+   hot vector".  We describe two policies that achieve (EPSILON, DELTA)-
+   DP on this use case: one which uses only a Client-DP mechanism and
+   targets the OAMC trust model, and another which uses only an
    Aggregator-DP mechanism and targets the more stringent OAOC trust
-   model.  We will then compare the utilities of both policies in
+   model.  We will then compare the utility of both policies in
    different settings of EPSILON and DELTA, which can be tuned to
    provide different levels of DP guarantee.
 
 6.1.1.  Prio3MultiHotHistogram with Client-DP
 
-      TODO Figure out if there is a way to endow Prio3Histogram with
-      local DP without modifying it.
-
-      Currently we will use a private VDAF Prio3MultiHotHistogram
-      discussed in https://github.com/cfrg/draft-irtf-cfrg-vdaf/
-      issues/287, that supports checking for bounded number of 1s after
-      the one-hot vector goes through randomized response Client-DP.
+      JC: For robustness, currently we will use a private VDAF
+      Prio3MultiHotHistogram discussed in https://github.com/cfrg/draft-
+      irtf-cfrg-vdaf/issues/287, that supports checking for bounded
+      number of 1s after the one-hot vector goes through randomized
+      response Client-DP.  We will need to update VDAF draft to specify
+      the validity circuit.
 
    Client-DP allows Clients to protect their privacy by adding noise to
    their measurements directly, as described in Appendix B.2.  Analyses
-   ([FMT20] and [FMT22]) have shown that the central DP guarantee can
-   also be amplified by aggregating Clients' measurements with Client-
-   DP.  In this policy, we will describe how to achieve the target
-   central DP guarantee, by picking a fixed Client-DP mechanism, along
-   with a VDAF for robustness considerations.
+   ([FMT20] and [FMT22]) have shown that, under OAMC trust model, we get
+   good (EPSILON, DELTA)-DP, by aggregating noisy Clients' measurements
+   with Client-DP.  In this policy, we will describe how to achieve
+   (EPSILON, DELTA)-DP, with binary randomized response Client-DP
+   mechanism, along with Prio3MultiHotHistogram VDAF for robustness
+   considerations.
 
 6.1.1.1.  Client-DP Mechanism
 
    The Client-DP we will use here is the binary randomized response
    mechanism described in Section 4.3, which is initialized with a
-   EPSILON_0 parameter.  The central DP guarantee of a batch is met, as
-   long as there are at least min_batch_size number of honest Clients,
-   each of which adds the randomized response Client-DP to its
-   measurement, and contributes the noisy measurement to the batch. >
-   TODO(junyechen1996): Justify why RR with EPSILON_0 + min_batch_size
-   can > achieve central (EPSILON, DELTA)-DP.
+   EPSILON_0 parameter.  We get (EPSILON, DELTA)-DP in the aggregate
+   result, as long as there are at least batch_size number of honest
+   Clients, each of which adds the randomized response Client-DP to its
+   measurement, and contributes the noisy measurement to the batch.  The
+   (EPSILON, DELTA)-DP degrades gracefully as the number of honest
+   Clients decreases, i.e., we can still achieve (EPSILON', DELTA)-DP,
+   where EPSILON' is larger than EPSILON. > TODO(junyechen1996): Justify
+   why RR with EPSILON_0 + batch_size can > achieve (EPSILON, DELTA)-DP
+   in the aggregate result.
 
 6.1.1.2.  VDAF Robustness
 
@@ -694,9 +691,9 @@ Table of Contents
    1.  Assume the length of the Client measurement is d, and there is
    exactly one bit set.  For the d - 1 coordinates with 0s, the
    probability p_0 of changing a coordinate from 0 to 1 is 1 /
-   (e^(EPSILON_0) + 1) per Section 4.3, so we can model the number of 1s
-   in the noisy measurement as a binomial random variable C with number
-   of trials d - 1, and probability p_0, plus the one bit that is
+   (exp(EPSILON_0) + 1) per Section 4.3, so we can model the number of
+   1s in the noisy measurement as a binomial random variable C with
+   number of trials d - 1, and probability p_0, plus the one bit that is
    already set.  Our goal is to ensure the probability p of 1 + C
    exceeding m is small enough, i.e., the false positive rate of a noisy
    measurement from an honest Client having more than m bits is at most
@@ -707,50 +704,39 @@ Table of Contents
    to perform verification and aggregation.  The final aggregate result
    is debiased based on the number of measurements according to
    Section 4.3, in order to reduce the bias introduced during Client-DP.
-   > TODO(junyechen1996): Specify the validity circuit for
-   Prio3MultiHotHistogram > in the VDAF draft.
 
-class MultiHotHistogramWithClientDp(DpPolicy):
-    Field = MultiHotHistogram.Field
-    Measurement = MultiHotHistogram.Measurement
-    AggShare = list[Field]
-    AggResult = MultiHotHistogram.AggResult
-    DebiasedAggResult = BinaryRandomizedResponse.DebiasedDataType
+   class MultiHotHistogramWithClientDp(DpPolicy):
+       Field = MultiHotHistogram.Field
+       Measurement = MultiHotHistogram.Measurement
+       AggShare = list[Field]
+       AggResult = MultiHotHistogram.AggResult
+       DebiasedAggResult = BinaryRandomizedResponse.DebiasedDataType
 
-    def __init__(self, eps0: float):
-        # TODO(junyechen1996): Justify how eps0 + min_batch_size can achieve
-        # (eps, delta)-DP.
-        self.rr = BinaryRandomizedResponse(eps0)
+       def __init__(self, eps0: float):
+           # TODO(junyechen1996): Justify how eps0 + batch_size can
+           # achieve `(EPSILON, DELTA)`-DP.
+           self.rr = BinaryRandomizedResponse(eps0)
 
-    def add_noise_to_measurement(self,
-                                 meas: Measurement,
-                                 ) -> Measurement:
-        return self.rr.add_noise(meas)
+       def add_noise_to_measurement(self,
+                                    meas: Measurement,
+                                    ) -> Measurement:
+           return self.rr.add_noise(meas)
 
-    def add_noise_to_agg_share(self,
-                               agg_share: AggShare,
-                               meas_count: int,
-                               min_batch_size: int,
-                               ) -> AggShare:
-        # Nothing to do in Aggregator-DP.
-        return agg_share
-
-    def debias_agg_result(self,
-                          agg_result: AggResult,
-                          meas_count: int,
-                          min_batch_size: int,
-                          num_aggregators: int,
-                          ) -> DebiasedAggResult:
-        return self.rr.debias(agg_result, meas_count)
+       def debias_agg_result(self,
+                             agg_result: AggResult,
+                             meas_count: int,
+                             ) -> DebiasedAggResult:
+           return self.rr.debias(agg_result, meas_count)
 
 6.1.1.3.  Utility
 
    As discussed in Section 4.3, as the number of Clients n increases,
    the noise at each coordinate of the debiased aggregate result
    approximates a Gaussian distribution with standard deviation sqrt(n *
-   e^(EPSILON_0) / (e^(EPSILON_0) - 1)^2).  We will look at the standard
-   deviation generated by binary randomized response from n Clients, in
-   order to achieve various combinations of central (EPSILON, DELTA)-DP.
+   exp(EPSILON_0) / (exp(EPSILON_0) - 1)^2).  We will look at the
+   standard deviation generated by binary randomized response from n
+   Clients, in order to achieve various combinations of (EPSILON,
+   DELTA)-DP.
 
       +=========+=======+====================+=====================+
       | EPSILON | DELTA | Standard deviation | Internal Parameters |

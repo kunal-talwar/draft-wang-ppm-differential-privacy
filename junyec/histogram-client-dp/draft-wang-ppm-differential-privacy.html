@@ -11,14 +11,14 @@
 <meta content="
        TODO Abstract 
     " name="description">
-<meta content="xml2rfc 3.18.1" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
 <meta content="draft-wang-ppm-differential-privacy-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.1
-    Python 3.11.5
+  xml2rfc 3.18.2
+    Python 3.11.6
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
     intervaltree 3.1.0
@@ -1033,7 +1033,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Chen, et al.</td>
-<td class="center">Expires 19 April 2024</td>
+<td class="center">Expires 20 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-17" class="published">17 October 2023</time>
+<time datetime="2023-10-18" class="published">18 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-19">19 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-20">20 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1109,7 +1109,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1380,6 +1380,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-2">This document uses the same conventions for error handling as <span>[<a href="#DAP" class="cite xref">DAP</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">Let <code>exp(EPSILON)</code> denote raising the numeric constant <code>e</code> to the power of
 <code>EPSILON</code>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">Under Central Limit Theorem (CLT), the sum of a large number of independently
+and identically distributed random variables approximates a normal distribution,
+or Gaussian distribution.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="overview">
@@ -1567,30 +1570,34 @@ response mechanisms have a debiasing step that removes bias.<a href="#section-4-
 <div class="alignLeft art-text artwork" id="section-4-6">
 <pre>
 class DpMechanism:
-    # The data type applicable to this `DpMechanism`. Here we are
-    # assuming the data type doesn't change before and after noise.
+    # The data type applicable to this `DpMechanism`. The type is the
+    # same for the noised data and the un-noised data.
     DataType = None
+    # Debiased data type after removing bias added by the noise. For
+    # most of the mechanisms, `DebiasedDataType == DataType`.
     DebiasedDataType = None
 
     def add_noise(self, data: DataType) -&gt; DataType:
         """Add noise to a piece of input data. """
         raise NotImplementedError()
 
-    def sample_noise(self, num_reps: int, dimension: int) -&gt; DataType:
+    def sample_noise(self, dimension: int) -&gt; DataType:
         """
-        Sample noise for `num_reps` number of times, with `dimension`.
+        Sample noise with the initialized `DpMechanism`. `dimension`
+        is used to determine the length of the output if `DataType` is
+        a list.
         """
         raise NotImplementedError()
 
     def debias(self,
-               agg: DataType,
+               data: DataType,
                meas_count: int) -&gt; DebiasedDataType:
         """
-        Debias the data due to the added noise.
-        This doesn't apply to all noises. Some Client-DP mechanisms
-        need this functionality.
+        Debias the data due to the added noise, based on the number of
+        measurements `meas_count`. This doesn't apply to all DP
+        mechanisms. Some Client-DP mechanisms need this functionality.
         """
-        raise NotImplementedError()
+        return data
 </pre><a href="#section-4-6" class="pilcrow">¶</a>
 </div>
 <div id="discrete-laplace">
@@ -1622,25 +1629,23 @@ class DpMechanism:
         <h3 id="name-binary-randomized-response">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-binary-randomized-response" class="section-name selfRef">Binary Randomized Response</a>
         </h3>
-<p id="section-4.3-1">The binary randomized response mechanism specified here aims to provide the
-DP guarantee at the Client level. It is the same as the one specified in
-Appendix C.1 of <span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">To apply noise at Client side, the Client flips a coin at each coordinate of its
-vector. If the coin turns out to be a head, the Client will change the value <code>x</code>
-at that coordinate to <code>1 - x</code>. The probability of the coin giving a head is
-<code>1 / (e^(EPSILON_0) + 1)</code>, where <code>EPSILON_0</code> provides the pure <code>EPSILON_0</code>-DP
-guarantee, in the deletion-DP model (Definition II.4 of <span>[<a href="#EFMR_20" class="cite xref">EFMR_20</a>]</span>), which
-ensures that it is impossible to confidently determine whether an individual
-contributed data to the final aggregate result.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">The final aggregate result is obtained by "debiasing" the aggregation of the
-noisy Client measurements. It is expressed as a vector of floats, because the
-debiasing operations involve floating point arithmetics.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">The binary randomized response mechanism specified in Appendix C.1 of
+<span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span> is <code>EPSILON_0</code>-DP at the Client level, in the deletion-DP model
+(Definition II.4 of <span>[<a href="#EFMR_20" class="cite xref">EFMR_20</a>]</span>).<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">Binary randomized response's input is a single bit <code>x</code>. The bit is flipped to
+<code>1 - x</code> with probability <code>1 / (exp(EPSILON_0) + 1)</code>.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">We generalize this noise by applying it independently at all coordinates of a
+Client's bit vector. Under OAMC trust model, it is proven in Appendix C.1.3
+of <span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span> that we get good <code>(EPSILON, DELTA)</code>-DP in the replacement-DP
+model, by aggregating a batch of noisy Client measurements, each of which is a
+bit vector with exactly one bit set, and is noised with binary randomized
+response at all coordinates. The final aggregate result needs to be "debiased"
+due to the noise added by the Clients, and is expressed as a vector of floats,
+because of floating point arithmetic.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">Since the noise generated by each Client at each coordinate is independent, and
-based on a coin flip with probability <code>1 / (e^(EPSILON_0) + 1)</code>, the noise
-generated by <code>n</code> number of Clients at each coordinate is a binomial
-distribution. By Central Limit Theorem (CLT), as <code>n</code> grows, the noise
-distribution approximates a Gaussian distribution, with standard deviation
-<code>sqrt(n * e^(EPSILON_0) / (e^(EPSILON_0) - 1)^2)</code>, as proved by Theorem C.2 of
+as the number of Clients <code>n</code> grows, the noise distribution at each coordinate
+approximates a Gaussian distribution, with standard deviation
+<code>sqrt(n * exp(EPSILON_0) / (exp(EPSILON_0) - 1)^2)</code>, as proved by Theorem C.2 of
 <span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span>.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4.3-5.1">
@@ -1671,29 +1676,24 @@ class BinaryRandomizedResponse(DpMechanism):
             data
         ))
 
-    def sample_noise(self, num_reps: int, dimension: int) -&gt; DataType:
-        # Pretend there are `num_reps` zeroed bit vectors with length
-        # equal to `dimension`, and we apply randomized response on
-        # each of them and aggregate them.
-        return [
-            sum(self.coin_flip() for i in range(num_reps))
-            for coord in range(dimension)
-        ]
+    def sample_noise(self, dimension: int) -&gt; DataType:
+        # Sample binary randomized response at each coordinate on an
+        # all zero vector.
+        return [int(self.coin_flip()) for coord in range(dimension)]
 
     def debias(self,
-               agg: DataType,
+               data: DataType,
                meas_count: int) -&gt; DebiasedDataType:
-        # Debias the aggregated histogram based on Appendix C.1.2 of
-        # {{MJTB+22}}.
+        # Debias the data based on Appendix C.1.2 of {{MJTB+22}}.
         exp_eps = math.exp(self.eps0)
         return list(map(
             lambda x: (x * (exp_eps + 1) / (exp_eps - 1) -
                        meas_count / (exp_eps - 1)),
-            agg
+            data
         ))
 
     def coin_flip(self):
-        return random.random() &lt; p
+        return random.random() &lt; self.p
 </pre><a href="#section-4.3-6" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1722,7 +1722,7 @@ batch size.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-5-4">The composition of Client- and Aggregator-DP mechanisms defines the DP
-policy for a VDAF, and enforces the target central DP guarantee.<a href="#section-5-4" class="pilcrow">¶</a></p>
+policy for a VDAF, and enforces the DP guarantee.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-5">
 <pre>
 class DpPolicy:
@@ -1740,34 +1740,30 @@ class DpPolicy:
                                  ) -&gt; Measurement:
         """
         Add noise to measurement, if required by the Client-DP
-        mechanism.
+        mechanism. The default implementation is to do nothing.
         """
-        raise NotImplementedError()
+        return meas
 
     def add_noise_to_agg_share(self,
                                agg_share: AggShare,
-                               meas_count: int,
-                               min_batch_size: int,
                                ) -&gt; AggShare:
         """
-        Add noise to aggregate share, if required by the
-        Aggregator-DP mechanism.
+        Add noise to aggregate share, if required by the Aggregator-DP
+        mechanism. The default implementation is to do nothing.
         """
-        raise NotImplementedError()
+        return agg_share
 
     def debias_agg_result(self,
                           agg_result: AggResult,
                           meas_count: int,
-                          min_batch_size: int,
-                          num_aggregators: int,
                           ) -&gt; DebiasedAggResult:
         """
         Debias aggregate result, if any of the Client- or
-        Aggregator-DP mechanism requires this operation, based on
-        the number of measurements, minimum batch size, and the
-        number of Aggregators.
+        Aggregator-DP mechanism requires this operation, based on the
+        number of measurements `meas_count`. The default
+        implementation is to do nothing.
         """
-        raise NotImplementedError()
+        return agg_result
 </pre><a href="#section-5-5" class="pilcrow">¶</a>
 </div>
 <div id="run-dp-policy-with-vdaf">
@@ -1782,7 +1778,6 @@ following:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 def run_dp_policy_with_vdaf(
     dp_policy: DpPolicy,
     Vdaf: Vdaf,
-    min_batch_size: int,
     agg_param: Vdaf.AggParam,
     measurements: list[DpPolicy.Measurement],
 ):
@@ -1847,9 +1842,8 @@ def run_dp_policy_with_vdaf(
         agg_share_j = Vdaf.aggregate(agg_param, out_shares_j)
         # Each Aggregator independently adds noise to its aggregate
         # share.
-        noised_agg_share_j = dp_policy.add_noise_to_agg_share(
-            agg_share_j, num_measurements, min_batch_size,
-        )
+        noised_agg_share_j = \
+            dp_policy.add_noise_to_agg_share(agg_share_j)
         agg_shares.append(noised_agg_share_j)
 
     # Collector unshards the aggregate.
@@ -1857,7 +1851,7 @@ def run_dp_policy_with_vdaf(
                               num_measurements)
     # Debias aggregate result.
     debiased_agg_result = dp_policy.debias_agg_result(
-        agg_result, num_measurements, min_batch_size, Vdaf.SHARES
+        agg_result, num_measurements
     )
     return debiased_agg_result
 </pre><a href="#section-5.1-2" class="pilcrow">¶</a>
@@ -1890,11 +1884,11 @@ def run_dp_policy_with_vdaf(
         </h3>
 <p id="section-6.1-1">Many applications require aggregating histograms in which each Client submits a
 bit vector with exactly one bit set, also known as, "one-hot vector". We
-describe two policies that achieve central <code>(EPSILON, DELTA)</code>-DP on this use
-case: one which uses only Client-DP mechanism and targets the OAMC trust model,
-and another which uses only Aggregator-DP mechanism and targets the more
-stringent OAOC trust model. We will then compare the utilities of both policies
-in different settings of <code>EPSILON</code> and <code>DELTA</code>, which can be tuned to provide
+describe two policies that achieve <code>(EPSILON, DELTA)</code>-DP on this use case: one
+which uses only a Client-DP mechanism and targets the OAMC trust model, and
+another which uses only an Aggregator-DP mechanism and targets the more
+stringent OAOC trust model. We will then compare the utility of both policies in
+different settings of <code>EPSILON</code> and <code>DELTA</code>, which can be tuned to provide
 different levels of DP guarantee.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div id="prio3multihothistogram-with-client-dp">
 <section id="section-6.1.1">
@@ -1903,33 +1897,36 @@ different levels of DP guarantee.<a href="#section-6.1-1" class="pilcrow">¶</a>
           </h4>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1.1-1.1">
-              <p id="section-6.1.1-1.1.1">TODO Figure out if there is a way to endow Prio3Histogram with local DP
-without modifying it.<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-1.1.2">Currently we will use a private VDAF <code>Prio3MultiHotHistogram</code> discussed in
+              <p id="section-6.1.1-1.1.1">JC: For robustness, currently we will use a private VDAF
+<code>Prio3MultiHotHistogram</code> discussed in
 https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/287, that supports
 checking for bounded number of 1s after the one-hot vector goes through
-randomized response Client-DP.<a href="#section-6.1.1-1.1.2" class="pilcrow">¶</a></p>
+randomized response Client-DP. We will need to update VDAF draft to specify
+the validity circuit.<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-6.1.1-2">Client-DP allows Clients to protect their privacy by adding noise to their
 measurements directly, as described in <a href="#levels" class="auto internal xref">Appendix B.2</a>. Analyses (<span>[<a href="#FMT20" class="cite xref">FMT20</a>]</span> and
-<span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>) have shown that the central DP guarantee can also be amplified
-by aggregating Clients' measurements with Client-DP. In this policy, we will
-describe how to achieve the target central DP guarantee, by picking a
-fixed Client-DP mechanism, along with a VDAF for robustness considerations.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<span>[<a href="#FMT22" class="cite xref">FMT22</a>]</span>) have shown that, under OAMC trust model, we get good
+<code>(EPSILON, DELTA)</code>-DP, by aggregating noisy Clients' measurements with
+Client-DP. In this policy, we will describe how to achieve
+<code>(EPSILON, DELTA)</code>-DP, with binary randomized response Client-DP mechanism,
+along with <code>Prio3MultiHotHistogram</code> VDAF for robustness considerations.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
 <div id="client-dp-mechanism">
 <section id="section-6.1.1.1">
             <h5 id="name-client-dp-mechanism">
 <a href="#section-6.1.1.1" class="section-number selfRef">6.1.1.1. </a><a href="#name-client-dp-mechanism" class="section-name selfRef">Client-DP Mechanism</a>
             </h5>
 <p id="section-6.1.1.1-1">The Client-DP we will use here is the binary randomized response mechanism
-described in <a href="#rr" class="auto internal xref">Section 4.3</a>, which is initialized with a <code>EPSILON_0</code> parameter. The
-central DP guarantee of a batch is met, as long as there are at least
-<code>min_batch_size</code> number of honest Clients, each of which adds the randomized
+described in <a href="#rr" class="auto internal xref">Section 4.3</a>, which is initialized with a <code>EPSILON_0</code> parameter. We get
+<code>(EPSILON, DELTA)</code>-DP in the aggregate result, as long as there are at least
+<code>batch_size</code> number of honest Clients, each of which adds the randomized
 response Client-DP to its measurement, and contributes the noisy measurement
-to the batch.
-&gt; TODO(junyechen1996): Justify why RR with <code>EPSILON_0</code> + <code>min_batch_size</code> can
-&gt; achieve central <code>(EPSILON, DELTA)</code>-DP.<a href="#section-6.1.1.1-1" class="pilcrow">¶</a></p>
+to the batch. The <code>(EPSILON, DELTA)</code>-DP degrades gracefully as the number of
+honest Clients decreases, i.e., we can still achieve <code>(EPSILON', DELTA)</code>-DP,
+where <code>EPSILON'</code> is larger than <code>EPSILON</code>.
+&gt; TODO(junyechen1996): Justify why RR with <code>EPSILON_0</code> + <code>batch_size</code> can
+&gt; achieve <code>(EPSILON, DELTA)</code>-DP in the aggregate result.<a href="#section-6.1.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="client-dp-vdaf-robustness">
@@ -1944,7 +1941,7 @@ robustness against malicious Clients, who attempt to bias the final histogram
 by setting many coordinates to be 1. Assume the length of the Client measurement
 is <code>d</code>, and there is exactly one bit set. For the <code>d - 1</code> coordinates with 0s,
 the probability <code>p_0</code> of changing a coordinate from 0 to 1 is
-<code>1 / (e^(EPSILON_0) + 1)</code> per <a href="#rr" class="auto internal xref">Section 4.3</a>, so we can model the number of 1s in the
+<code>1 / (exp(EPSILON_0) + 1)</code> per <a href="#rr" class="auto internal xref">Section 4.3</a>, so we can model the number of 1s in the
 noisy measurement as a binomial random variable <code>C</code> with number of trials
 <code>d - 1</code>, and probability <code>p_0</code>, plus the one bit that is already set. Our goal
 is to ensure the probability <code>p</code> of <code>1 + C</code> exceeding <code>m</code> is small enough, i.e.,
@@ -1955,9 +1952,7 @@ that the cumulative distribution function (CDF) satisfies
 <p id="section-6.1.1.2-2">Once we find <code>m</code>, we will use it to instantiate <code>Prio3MultiHotHistogram</code> to
 perform verification and aggregation. The final aggregate result is debiased
 based on the number of measurements according to <a href="#rr" class="auto internal xref">Section 4.3</a>, in order to reduce
-the bias introduced during Client-DP.
-&gt; TODO(junyechen1996): Specify the validity circuit for <code>Prio3MultiHotHistogram</code>
-&gt; in the VDAF draft.<a href="#section-6.1.1.2-2" class="pilcrow">¶</a></p>
+the bias introduced during Client-DP.<a href="#section-6.1.1.2-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.1.1.2-3">
 <pre>
 class MultiHotHistogramWithClientDp(DpPolicy):
@@ -1968,8 +1963,8 @@ class MultiHotHistogramWithClientDp(DpPolicy):
     DebiasedAggResult = BinaryRandomizedResponse.DebiasedDataType
 
     def __init__(self, eps0: float):
-        # TODO(junyechen1996): Justify how eps0 + min_batch_size can achieve
-        # (eps, delta)-DP.
+        # TODO(junyechen1996): Justify how eps0 + batch_size can
+        # achieve `(EPSILON, DELTA)`-DP.
         self.rr = BinaryRandomizedResponse(eps0)
 
     def add_noise_to_measurement(self,
@@ -1977,19 +1972,9 @@ class MultiHotHistogramWithClientDp(DpPolicy):
                                  ) -&gt; Measurement:
         return self.rr.add_noise(meas)
 
-    def add_noise_to_agg_share(self,
-                               agg_share: AggShare,
-                               meas_count: int,
-                               min_batch_size: int,
-                               ) -&gt; AggShare:
-        # Nothing to do in Aggregator-DP.
-        return agg_share
-
     def debias_agg_result(self,
                           agg_result: AggResult,
                           meas_count: int,
-                          min_batch_size: int,
-                          num_aggregators: int,
                           ) -&gt; DebiasedAggResult:
         return self.rr.debias(agg_result, meas_count)
 </pre><a href="#section-6.1.1.2-3" class="pilcrow">¶</a>
@@ -2004,9 +1989,9 @@ class MultiHotHistogramWithClientDp(DpPolicy):
 <p id="section-6.1.1.3-1">As discussed in <a href="#rr" class="auto internal xref">Section 4.3</a>, as the number of Clients <code>n</code> increases, the noise
 at each coordinate of the debiased aggregate result approximates a Gaussian
 distribution with standard deviation
-<code>sqrt(n * e^(EPSILON_0) / (e^(EPSILON_0) - 1)^2)</code>. We will look at the standard
-deviation generated by binary randomized response from <code>n</code> Clients, in order to
-achieve various combinations of central <code>(EPSILON, DELTA)</code>-DP.<a href="#section-6.1.1.3-1" class="pilcrow">¶</a></p>
+<code>sqrt(n * exp(EPSILON_0) / (exp(EPSILON_0) - 1)^2)</code>. We will look at the
+standard deviation generated by binary randomized response from <code>n</code> Clients,
+in order to achieve various combinations of <code>(EPSILON, DELTA)</code>-DP.<a href="#section-6.1.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-utility-of-pure-client-dp-f"></span><div id="histogram-client-dp">
 <table class="center" id="table-1">
               <caption>
