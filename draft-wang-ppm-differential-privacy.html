@@ -11,14 +11,14 @@
 <meta content="
        TODO Abstract 
     " name="description">
-<meta content="xml2rfc 3.18.1" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
 <meta content="draft-wang-ppm-differential-privacy-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.1
-    Python 3.11.5
+  xml2rfc 3.18.2
+    Python 3.11.6
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
     intervaltree 3.1.0
@@ -1033,7 +1033,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Chen, et al.</td>
-<td class="center">Expires 12 April 2024</td>
+<td class="center">Expires 20 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wang-ppm-differential-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-10" class="published">10 October 2023</time>
+<time datetime="2023-10-18" class="published">18 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-12">12 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-20">20 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1109,7 +1109,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1564,29 +1564,34 @@ response mechanisms have a debiasing step that removes bias.<a href="#section-4-
 <div class="alignLeft art-text artwork" id="section-4-6">
 <pre>
 class DpMechanism:
-    DataType
-    DebiasedDataType
+    # The data type applicable to this `DpMechanism`. The type is the
+    # same for the noised data and the un-noised data.
+    DataType = None
+    # Debiased data type after removing bias added by the noise. For
+    # most of the mechanisms, `DebiasedDataType == DataType`.
+    DebiasedDataType = None
 
     def add_noise(self, data: DataType) -&gt; DataType:
         """Add noise to a piece of input data. """
-        pass
+        raise NotImplementedError()
 
-    def sample_noise(self, num_reps: int, dimension: int) -&gt; DataType:
+    def sample_noise(self, dimension: int) -&gt; DataType:
         """
-        Sample noise for `num_reps` number of times,
-        with `dimension`.
+        Sample noise with the initialized `DpMechanism`. `dimension`
+        is used to determine the length of the output if `DataType` is
+        a list.
         """
-        pass
+        raise NotImplementedError()
 
     def debias(self,
-               agg: DataType,
+               data: DataType,
                meas_count: int) -&gt; DebiasedDataType:
         """
-        Debias the data due to the added noise.
-        This doesn't apply to all noises. Some Client-DP mechanisms
-        need this functionality.
+        Debias the data due to the added noise, based on the number of
+        measurements `meas_count`. This doesn't apply to all DP
+        mechanisms. Some Client-DP mechanisms need this functionality.
         """
-        pass
+        return data
 </pre><a href="#section-4-6" class="pilcrow">¶</a>
 </div>
 <div id="discrete-laplace">
@@ -1653,44 +1658,44 @@ policy for a VDAF, and enforces the DP guarantee.<a href="#section-5-4" class="p
 <div class="alignLeft art-text artwork" id="section-5-5">
 <pre>
 class DpPolicy:
-    Measurement
-    AggregateShare
-    AggregateResult
-    DebiasedAggregateResult
+    # Client measurement type.
+    Measurement = None
+    # Aggregate share type, owned by an Aggregator.
+    AggShare = None
+    # Aggregate result type, unsharded result from all Aggregators.
+    AggResult = None
+    # Debiased aggregate result type.
+    DebiasedAggResult = None
 
     def add_noise_to_measurement(self,
                                  meas: Measurement,
                                  ) -&gt; Measurement:
         """
         Add noise to measurement, if required by the Client-DP
-        mechanism.
+        mechanism. The default implementation is to do nothing.
         """
-        pass
+        return meas
 
     def add_noise_to_agg_share(self,
-                               agg_share: AggregateShare,
-                               meas_count: Unsigned,
-                               min_batch_size: Unsigned,
-                               ) -&gt; AggregateShare:
+                               agg_share: AggShare,
+                               ) -&gt; AggShare:
         """
         Add noise to aggregate share, if required by the Aggregator-DP
-        mechanism.
+        mechanism. The default implementation is to do nothing.
         """
-        pass
+        return agg_share
 
     def debias_agg_result(self,
-                          agg_result: AggregateResult,
-                          meas_count: Unsigned,
-                          min_batch_size: Unsigned,
-                          num_aggregators: Unsigned,
-                          ) -&gt; DebiasedAggregateResult:
+                          agg_result: AggResult,
+                          meas_count: int,
+                          ) -&gt; DebiasedAggResult:
         """
         Debias aggregate result, if any of the Client- or
-        Aggregator-DP mechanism requires this operation,
-        based on the number of measurements, minimum batch size,
-        and the number of Aggregators.
+        Aggregator-DP mechanism requires this operation, based on the
+        number of measurements `meas_count`. The default
+        implementation is to do nothing.
         """
-        pass
+        return agg_result
 </pre><a href="#section-5-5" class="pilcrow">¶</a>
 </div>
 <div id="dp-in-dap">
