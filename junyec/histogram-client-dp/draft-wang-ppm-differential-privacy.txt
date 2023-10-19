@@ -972,7 +972,8 @@ Table of Contents
               Rothblum, Michael Scaria, Linmao Song, Congzheng Song,
               Karl Tarbe, Sebastian Vogt, Luke Winstrom, and Shundong
               Zhou, "Samplable Anonymous Aggregation for Private
-              Federated Data Analysis", n.d..
+              Federated Data Analysis", 2023,
+              <https://arxiv.org/abs/2307.15017>.
 
 Appendix A.  Contributors
 
