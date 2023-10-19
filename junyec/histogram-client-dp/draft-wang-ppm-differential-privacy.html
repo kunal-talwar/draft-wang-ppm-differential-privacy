@@ -1989,25 +1989,25 @@ where <code>EPSILON'</code> is larger than <code>EPSILON</code>.
 <a href="#section-6.1.1.2" class="section-number selfRef">6.1.1.2. </a><a href="#name-vdaf-robustness" class="section-name selfRef">VDAF Robustness</a>
             </h5>
 <p id="section-6.1.1.2-1">Because applying binary randomized response at all coordinates of an one-hot
-Client measurement can cause the noisy measurement to have multiple bits set,
-we need to check the noisy measurement has at most <code>m</code> number of 1s, to ensure
-robustness against malicious Clients, who attempt to bias the final histogram
-by setting many coordinates to be 1. Assume the length of the Client measurement
-is <code>d</code>, and there is exactly one bit set. For the <code>d - 1</code> coordinates with 0s,
-the probability <code>p_0</code> of changing a coordinate from 0 to 1 is
-<code>1 / (exp(EPSILON_0) + 1)</code> per <a href="#rr" class="auto internal xref">Section 4.3</a>, so we can model the number of 1s in the
-noisy measurement as a binomial random variable <code>C</code> with number of trials
-<code>d - 1</code>, and probability <code>p_0</code>, plus the one bit that is already set. Our goal
-is to ensure the probability <code>p</code> of <code>1 + C</code> exceeding <code>m</code> is small enough, i.e.,
-the false positive rate of a noisy measurement from an honest Client having more
-than <code>m</code> bits is at most <code>p</code>. This is equivalent to finding <code>m</code> and <code>p</code>, such
-that the cumulative distribution function (CDF) satisfies
-<code>Pr(C &lt;= m - 1) &gt;= 1 - p</code>.<a href="#section-6.1.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.1.2-2">Once we find <code>m</code>, we will use it to instantiate <code>Prio3MultiHotHistogram</code> to
+Client measurement can cause the noisy measurement to have multiple bits set, we
+we need to check the noisy measurement has at most <code>m</code> number of 1s, per Section
+4.5 of <span>[<a href="#TWMJ_23" class="cite xref">TWMJ_23</a>]</span>, to ensure robustness against malicious Clients, who attempt
+to bias the final histogram by setting many coordinates to be 1.<a href="#section-6.1.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1.2-2">Assume the length of the Client measurement is <code>d</code>, and there is exactly one bit
+set. For the <code>d - 1</code> coordinates with 0s, the probability <code>p_0</code> of changing a
+coordinate from 0 to 1 is <code>1 / (exp(EPSILON_0) + 1)</code> per <a href="#rr" class="auto internal xref">Section 4.3</a>, so we can model
+the number of 1s in the noisy measurement as a binomial random variable <code>C</code> with
+number of trials <code>d - 1</code>, and probability <code>p_0</code>, plus the one bit that is
+already set. Our goal is to ensure the probability <code>p</code> of <code>1 + C</code> exceeding <code>m</code>
+is small enough, i.e., the false positive rate of a noisy measurement from an
+honest Client having more than <code>m</code> bits is at most <code>p</code>. This is equivalent to
+finding <code>m</code> and <code>p</code>, such that the cumulative distribution function (CDF)
+satisfies <code>Pr(C &lt;= m - 1) &gt;= 1 - p</code>.<a href="#section-6.1.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1.2-3">Once we find <code>m</code>, we will use it to instantiate <code>Prio3MultiHotHistogram</code> to
 perform verification and aggregation. The final aggregate result is debiased
 based on the number of measurements according to <a href="#rr" class="auto internal xref">Section 4.3</a>, in order to reduce
-the bias introduced during Client-DP.<a href="#section-6.1.1.2-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.1.1.2-3">
+the bias introduced during Client-DP.<a href="#section-6.1.1.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1.1.2-4">
 <pre>
 class MultiHotHistogramWithClientDp(DpPolicy):
     Field = MultiHotHistogram.Field
@@ -2031,7 +2031,7 @@ class MultiHotHistogramWithClientDp(DpPolicy):
                           meas_count: int,
                           ) -&gt; DebiasedAggResult:
         return self.rr.debias(agg_result, meas_count)
-</pre><a href="#section-6.1.1.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-6.1.1.2-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2268,8 +2268,12 @@ it in <a href="#discrete-gaussian" class="auto internal xref">Section 4.2</a>.<a
 <span class="refAuthor">McMillan, A.</span>, <span class="refAuthor">Javidbakht, O.</span>, <span class="refAuthor">Talwar, K.</span>, <span class="refAuthor">Briggs, E.</span>, <span class="refAuthor">Chatzidakis, M.</span>, <span class="refAuthor">Chen, J.</span>, <span class="refAuthor">Duchi, J.</span>, <span class="refAuthor">Feldman, V.</span>, <span class="refAuthor">Goren, Y.</span>, <span class="refAuthor">Hesse, M.</span>, <span class="refAuthor">Jina, V.</span>, <span class="refAuthor">Katti, A.</span>, <span class="refAuthor">Liu, A.</span>, <span class="refAuthor">Lyford, C.</span>, <span class="refAuthor">Meyer, J.</span>, <span class="refAuthor">Palmer, A.</span>, <span class="refAuthor">Park, D.</span>, <span class="refAuthor">Park, W.</span>, <span class="refAuthor">Parsa, G.</span>, <span class="refAuthor">Pelzl, P.</span>, <span class="refAuthor">Rishi, R.</span>, <span class="refAuthor">Song, C.</span>, <span class="refAuthor">Wang, S.</span>, and <span class="refAuthor">S. Zhou</span>, <span class="refTitle">"Private Federated Statistics in an Interactive Setting"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://arxiv.org/abs/2211.10082">https://arxiv.org/abs/2211.10082</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MPRV09">[MPRV09]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Mironov, I.</span>, <span class="refAuthor">Pandey, O.</span>, <span class="refAuthor">Reingold, O.</span>, and <span class="refAuthor">S. Vadhan</span>, <span class="refTitle">"Computational Differential Privacy"</span>, <span>n.d.</span>, <span>&lt;<a href="https://link.springer.com/chapter/10.1007/978-3-642-03356-8_8">https://link.springer.com/chapter/10.1007/978-3-642-03356-8_8</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TWMJ_23">[TWMJ_23]</dt>
+      <dd>
+<span class="refAuthor">Kunal Talwar</span>, <span class="refAuthor">Shan Wang</span>, <span class="refAuthor">Audra McMillan</span>, <span class="refAuthor">Vojta Jina</span>, <span class="refAuthor">Vitaly Feldman</span>, <span class="refAuthor">Bailey Basile</span>, <span class="refAuthor">Aine Cahill</span>, <span class="refAuthor">Yi Sheng Chan</span>, <span class="refAuthor">Mike Chatzidakis</span>, <span class="refAuthor">Junye Chen</span>, <span class="refAuthor">Oliver Chick</span>, <span class="refAuthor">Mona Chitnis</span>, <span class="refAuthor">Suman Ganta</span>, <span class="refAuthor">Yusuf Goren</span>, <span class="refAuthor">Filip Granqvist</span>, <span class="refAuthor">Kristine Guo</span>, <span class="refAuthor">Frederic Jacobs</span>, <span class="refAuthor">Omid Javidbakht</span>, <span class="refAuthor">Albert Liu</span>, <span class="refAuthor">Richard Low</span>, <span class="refAuthor">Dan Mascenik</span>, <span class="refAuthor">Steve Myers</span>, <span class="refAuthor">David Park</span>, <span class="refAuthor">Wonhee Park</span>, <span class="refAuthor">Gianni Parsa</span>, <span class="refAuthor">Tommy Pauly</span>, <span class="refAuthor">Christian Priebe</span>, <span class="refAuthor">Rehan Rishi</span>, <span class="refAuthor">Guy Rothblum</span>, <span class="refAuthor">Michael Scaria</span>, <span class="refAuthor">Linmao Song</span>, <span class="refAuthor">Congzheng Song</span>, <span class="refAuthor">Karl Tarbe</span>, <span class="refAuthor">Sebastian Vogt</span>, <span class="refAuthor">Luke Winstrom</span>, and <span class="refAuthor">Shundong Zhou</span>, <span class="refTitle">"Samplable Anonymous Aggregation for Private Federated Data Analysis"</span>, <span>n.d.</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

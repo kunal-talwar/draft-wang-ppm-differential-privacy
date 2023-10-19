@@ -730,10 +730,12 @@ Table of Contents
 
    Because applying binary randomized response at all coordinates of an
    one-hot Client measurement can cause the noisy measurement to have
-   multiple bits set, we need to check the noisy measurement has at most
-   m number of 1s, to ensure robustness against malicious Clients, who
-   attempt to bias the final histogram by setting many coordinates to be
-   1.  Assume the length of the Client measurement is d, and there is
+   multiple bits set, we we need to check the noisy measurement has at
+   most m number of 1s, per Section 4.5 of [TWMJ_23], to ensure
+   robustness against malicious Clients, who attempt to bias the final
+   histogram by setting many coordinates to be 1.
+
+   Assume the length of the Client measurement is d, and there is
    exactly one bit set.  For the d - 1 coordinates with 0s, the
    probability p_0 of changing a coordinate from 0 to 1 is 1 /
    (exp(EPSILON_0) + 1) per Section 4.3, so we can model the number of
@@ -959,6 +961,18 @@ Table of Contents
               "Computational Differential Privacy", n.d.,
               <https://link.springer.com/
               chapter/10.1007/978-3-642-03356-8_8>.
+
+   [TWMJ_23]  Kunal Talwar, Shan Wang, Audra McMillan, Vojta Jina,
+              Vitaly Feldman, Bailey Basile, Aine Cahill, Yi Sheng Chan,
+              Mike Chatzidakis, Junye Chen, Oliver Chick, Mona Chitnis,
+              Suman Ganta, Yusuf Goren, Filip Granqvist, Kristine Guo,
+              Frederic Jacobs, Omid Javidbakht, Albert Liu, Richard Low,
+              Dan Mascenik, Steve Myers, David Park, Wonhee Park, Gianni
+              Parsa, Tommy Pauly, Christian Priebe, Rehan Rishi, Guy
+              Rothblum, Michael Scaria, Linmao Song, Congzheng Song,
+              Karl Tarbe, Sebastian Vogt, Luke Winstrom, and Shundong
+              Zhou, "Samplable Anonymous Aggregation for Private
+              Federated Data Analysis", n.d..
 
 Appendix A.  Contributors
 
