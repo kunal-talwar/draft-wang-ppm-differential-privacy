@@ -481,7 +481,7 @@ Table of Contents
 
    Intuitively, if we think of the reference distribution R as an
    average, noisy Client measurement, deletion-DP makes it hard to
-   distinguish the Client measurement D, from the measurement from an
+   distinguish the Client measurement D from the measurement from an
    average Client.
 
 4.3.2.  Reference Implementation
