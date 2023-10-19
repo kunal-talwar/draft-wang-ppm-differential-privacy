@@ -448,13 +448,13 @@ Table of Contents
 
 4.3.  Binary Randomized Response
 
-   The binary randomized response mechanism specified in Appendix C.1 of
-   [MJTB_22] is initialized with a parameter EPSILON_0, and takes in a
-   single bit x.  The bit is flipped to 1 - x with probability 1 /
-   (exp(EPSILON_0) + 1).  For example, if EPSILON_0 is configured to be
-   3, and the input to binary randomized response is a 0, the bit will
-   be flipped to be 1 with probability 1 / (exp(3) + 1), otherwise, it
-   will stay as a 0.
+   This section describes the binary randomized response mechanism,
+   specified in Appendix C.1 of [MJTB_22].  It is initialized with a
+   parameter EPSILON_0, and takes in a single bit x.  The bit is flipped
+   to 1 - x with probability 1 / (exp(EPSILON_0) + 1).  For example, if
+   EPSILON_0 is configured to be 3, and the input to binary randomized
+   response is a 0, the bit will be flipped to be 1 with probability 1 /
+   (exp(3) + 1), otherwise, it will stay as a 0.
 
    Under OC trust model, by applying binary randomized response with
    EPSILON_0 parameter to its measurement, the Client gets EPSILON_0-DP
@@ -498,7 +498,7 @@ Table of Contents
 
    Intuitively, if we think of the reference distribution R as an
    average, noisy Client measurement, deletion-DP makes it hard to
-   distinguish the Client measurement D, from the measurement from an
+   distinguish the Client measurement D from the measurement from an
    average Client.
 
 4.3.2.  Reference Implementation
