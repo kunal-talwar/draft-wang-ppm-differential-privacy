@@ -5,10 +5,10 @@
 Privacy Preserving Measurement                                   J. Chen
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 20 April 2024                                        Cloudflare
+Expires: 21 April 2024                                        Cloudflare
                                                                  S. Wang
                                                               Apple Inc.
-                                                         18 October 2023
+                                                         19 October 2023
 
 
                 Differential Privacy Mechanisms for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 April 2024.
+   This Internet-Draft will expire on 21 April 2024.
 
 Copyright Notice
 
@@ -422,7 +422,7 @@ Table of Contents
 4.3.  Binary Randomized Response
 
    The binary randomized response mechanism specified in Appendix C.1 of
-   [MJTB_22] is EPSILON_0-DP at the Client level, in the deletion-DP
+   [MJTB_22] is EPSILON_0-DP at the OC trust model, in the deletion-DP
    model (Definition II.4 of [EFMR_20]).
 
    Binary randomized response's input is a single bit x.  The bit is
