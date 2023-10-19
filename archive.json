@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-12T00:50:49.007452+00:00",
+  "timestamp": "2023-10-19T00:52:42.034876+00:00",
   "repo": "wangshan/draft-wang-ppm-differential-privacy",
   "labels": [
     {
@@ -213,6 +213,38 @@
       "body": "              Did you know that you can do this now:\r\n\r\n```suggestion\r\nLet `exp(\u03b5)` denote raising the numeric constant `e` to the power of\r\n```\r\n\r\nOf course, whether you want to or not is something you will need to decide.\r\n\r\n_Originally posted by @martinthomson in https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/17#discussion_r1329403113_\r\n            ",
       "createdAt": "2023-09-20T17:37:36Z",
       "updatedAt": "2023-09-20T17:37:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOJ7sZWc50PDO7",
+      "title": "Use fixed precision in parameters",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/issues/23",
+      "state": "OPEN",
+      "author": "junyechen1996",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This includes `epsilon` and `delta` parameters in DP policies, and also the parameters to initialize samplers, such as `sigma` for discrete Gaussian.",
+      "createdAt": "2023-10-18T16:01:44Z",
+      "updatedAt": "2023-10-18T16:01:44Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOJ7sZWc50PLDX",
+      "title": "Organize reference implementation into python modules",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/issues/24",
+      "state": "OPEN",
+      "author": "junyechen1996",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This will make importing sources a lot cleaner and will make unit testing more standard (e.g. with `unittest` and `pytest`).",
+      "createdAt": "2023-10-18T16:13:26Z",
+      "updatedAt": "2023-10-18T16:13:26Z",
       "closedAt": null,
       "comments": []
     }
@@ -3366,6 +3398,597 @@
           "createdAt": "2023-10-03T04:28:18Z",
           "updatedAt": "2023-10-03T04:28:18Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOJ7sZWc5dAM_K",
+      "title": "Set up reference implementation folder",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/21",
+      "state": "MERGED",
+      "author": "junyechen1996",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Set up reference implementation folder structure with the DP mechanisms, DP policies, and the submoduled VDAF reference implementation.",
+      "createdAt": "2023-10-17T11:07:30Z",
+      "updatedAt": "2023-10-18T17:45:01Z",
+      "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "1592b0352b60b1ca05723a3b5253029927ea8bb1",
+      "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "headRefName": "junyec/ref-impl",
+      "headRefOid": "2887d25a89fedf2a0e29b03f634f4d9f6c422e53",
+      "closedAt": "2023-10-18T17:45:01Z",
+      "mergedAt": "2023-10-18T17:45:01Z",
+      "mergedBy": "junyechen1996",
+      "mergeCommit": {
+        "oid": "3d401e96c7e8beb127102a6ff6cadf6cb08ef213"
+      },
+      "comments": [
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Will try to set up more standard unit testing in python (e.g. unittest, pytest). The current setup highly mimics the setup in VDAF draft, which should be ok for now.",
+          "createdAt": "2023-10-17T15:43:36Z",
+          "updatedAt": "2023-10-17T15:43:36Z"
+        },
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think there is anything major. So I will squash and merge to make other PRs easier to review.",
+          "createdAt": "2023-10-18T17:42:49Z",
+          "updatedAt": "2023-10-18T17:42:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ7sZWc5kTFjD",
+          "commit": {
+            "abbreviatedOid": "1a8d839"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-17T15:45:31Z",
+          "updatedAt": "2023-10-17T15:45:40Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "For this particular reason, this API's name may need to be changed to accommodate this problem. It's not strictly limited to debiasing for Client-DP. We basically need a way to \"postprocess\" the aggregate result from VDAF, knowing the DP noise we added.",
+              "createdAt": "2023-10-17T15:45:31Z",
+              "updatedAt": "2023-10-17T15:45:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kXCJw",
+          "commit": {
+            "abbreviatedOid": "1a8d839"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looking good. I've left a number of comments, but all of them should be straightforward for you to address. I'm approving now to unblock you in case you want to merge now and defer some of the work to later. (Use your best judgement, I trust you.)",
+          "createdAt": "2023-10-18T01:49:02Z",
+          "updatedAt": "2023-10-18T02:25:38Z",
+          "comments": [
+            {
+              "originalPosition": 2,
+              "body": "```suggestion\r\nBinary randomized response mechanism based from Appendix C.1 in\r\n```",
+              "createdAt": "2023-10-18T01:49:03Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Ok, it's a bit of a lie that we would add noise to the aggregate result. We could be more specific about the VDAF syntax, but when talking about DP mechanisms, I think it'll be useful to be somewaht agnostic about the protocol with we're making DP.\r\n\r\n```suggestion\r\nA DP mechanism is responsible for sampling noise and adding it to either a measurement or the aggregate result itself.\r\n```",
+              "createdAt": "2023-10-18T01:51:32Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n    # The data type applicable to this `DpMechanism`. The type is the same for the noised data s for the un-noised data.\r\n```",
+              "createdAt": "2023-10-18T01:54:04Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "Worth adding a comment here describing DebiasedDataType. Also worth noting that, for some DP mechanisms, `DebiasedDataType == DataType`.",
+              "createdAt": "2023-10-18T01:54:59Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "Define the terms `num_reps` and `dimension`.",
+              "createdAt": "2023-10-18T01:55:52Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "What do you think?\r\n\r\nHere and elsewhere.\r\n\r\n```suggestion\r\n               data: DataType,\r\n```",
+              "createdAt": "2023-10-18T01:56:17Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "Ragged line. Is this intentional? If this line and the next are part of the same paragraph, then we should break the line at 80 characters.",
+              "createdAt": "2023-10-18T01:57:05Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n               agg_result: DataType,\r\n```",
+              "createdAt": "2023-10-18T01:57:50Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "Consider making this the default implementation of `debias()`, i.e., moving this implementation to the base class. (Since most of the time debiasing will be a no-op, right?)\r\n\r\nSimilar above.",
+              "createdAt": "2023-10-18T01:58:34Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "`float` is fine for now, but this raises a question I think we should surface as a GH issue: should the spec use floats or fixed precision? Relatedly, what about representing constants like `EPSILON` or `DELTA` as ratoinals? This is what we ended up doing in liprio-rs, in anticipation of this question.",
+              "createdAt": "2023-10-18T02:01:33Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 2,
+              "body": "For consistency with the draft. (Or, if you like update the draft to use `eps` and `delta`. Go with whatever feels right!) Also, I like to use backticks around variables I refer to in comments. Just a suggestion, again totally up to you.\r\n\r\nHere and below.\r\n\r\n```suggestion\r\nA policy that uses only Aggregator-DP to achieve central (`EPSILON`, `DELTA`)-DP.\r\n```",
+              "createdAt": "2023-10-18T02:02:33Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "This strikes me as a bit non-standard for structuring Python projects. I see the appeal of nested structure since it groups related things. This is why in the VDAF draft we gave related modules a related prefix, e.g., `vdaf` and `vdaf_prio3`. If you want nested structure, then I suggest reading up on how to do this properly. Back in the Python2 it was a simple matter of creating an `__init__.py` in each directory that defines the files in the module. (Not sure what we do in Python3.)\r\n\r\nAnother option would be to flatten the directory structure so that all modules you want ti import appear in the same directory. Then all you have to do is import.\r\n\r\n",
+              "createdAt": "2023-10-18T02:09:48Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "This is the exception to the above comment: I don't think there's a better way to to include sources from a submodule.",
+              "createdAt": "2023-10-18T02:10:10Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "Consider pointing to https://github.com/wangshan/draft-wang-ppm-differential-privacy/issues/10 here.\r\n\r\nSimilar comment on the other mechanisms below.",
+              "createdAt": "2023-10-18T02:12:01Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Actually this depends on the threat model right? E.g., for HistogramWithAggregatorDp we need only one Aggregator to be honest, but we lose some utility if both Aggregators are honest.",
+              "createdAt": "2023-10-18T02:13:28Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "Worth calling out here that this is specific to VDAF.",
+              "createdAt": "2023-10-18T02:15:11Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "Remind me why we distinguish between `meas_count` and `min_batch_size`? Also, please document these parameters in the function comment below.\r\n\r\nIf this is related to the \"compensation\" idea (https://docs.google.com/document/d/1a5EoDLswyI0IKv2xwyqF4kMJNqRdVKapskeqwPtuqa4/edit), then I think we agreed to hold off on that idea in the intial draft. cc/ @wangshan to confirm.\r\n\r\nSimilar question for debias_agg_result() below.",
+              "createdAt": "2023-10-18T02:18:59Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "Consider making this the default implementation. (Same idea as a previous comment.)",
+              "createdAt": "2023-10-18T02:21:27Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "Good catch, let's generalize in this PR? Just call it \"postprocess\" for now and consider listing \"debiasing the noise\" as one possible application.",
+              "createdAt": "2023-10-18T02:22:26Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "Why talk about the min batch size and not the concrete batch size? (Clarify in the comment.)",
+              "createdAt": "2023-10-18T02:22:50Z",
+              "updatedAt": "2023-10-18T02:25:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kb1Jd",
+          "commit": {
+            "abbreviatedOid": "1a8d839"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-18T13:01:42Z",
+          "updatedAt": "2023-10-18T13:31:35Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "@cjpatton I would avoid mentioning aggregate result, in aggregator-DP policy the noise is added to aggregate share not aggregate result. We either be agonistic and say \"adding noise to data\", or use the exact term used in VDAF.",
+              "createdAt": "2023-10-18T13:01:42Z",
+              "updatedAt": "2023-10-18T13:31:35Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "I think this still counts as debias. Postprocess is too vague a term, it's hard to explain what should and shouldn't go into postprocess. So here you basically need to convert a List[Field] to list[int] first, then add noise?",
+              "createdAt": "2023-10-18T13:12:17Z",
+              "updatedAt": "2023-10-18T13:31:35Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "It's mainly for compensation, same for `debias_agg_result`: it needs to know how many noise compensation has been added. \r\n\r\nI think we can move remove min_batch_size from the interface for now. With some explanation on the min batch size: 1). with client-DP the min batch size is calculated by client noise and desired aggregator-DP. 2). DpPolicy will not be invoked if the min_batch_size from DAP is not satisfied, and the batch will be dropped.",
+              "createdAt": "2023-10-18T13:31:28Z",
+              "updatedAt": "2023-10-18T13:31:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kcHz0",
+          "commit": {
+            "abbreviatedOid": "1a8d839"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-18T13:31:49Z",
+          "updatedAt": "2023-10-18T13:31:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kdnfa",
+          "commit": {
+            "abbreviatedOid": "8d8c34a"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-18T15:58:50Z",
+          "updatedAt": "2023-10-18T17:31:25Z",
+          "comments": [
+            {
+              "originalPosition": 2,
+              "body": "Removed \"based\" as well.",
+              "createdAt": "2023-10-18T15:58:50Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "I think we should try to use rationals as much as possible. Raised an issue here: https://github.com/wangshan/draft-wang-ppm-differential-privacy/issues/23",
+              "createdAt": "2023-10-18T16:02:31Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "Good call. Fixed.",
+              "createdAt": "2023-10-18T16:06:01Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "I think I will be consistent with using `data` in `DpMechanism`. I will use `agg_result` in `DpPolicy`.",
+              "createdAt": "2023-10-18T16:09:08Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "I think eventually we may bump into cases where unnoised data type is the same as noised data type :) but I will remove the assumption for now.",
+              "createdAt": "2023-10-18T16:10:12Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "Yes I agree. That's part of the problem of not using modules. Let me file a GitHub issue to use module-based source files (with `__init__.py`) and resolve it later. Filed #24 ",
+              "createdAt": "2023-10-18T16:12:21Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Agree it should be VDAF agnostic. How about \"adding it to the data with the type applicable to the DP mechanism\"?",
+              "createdAt": "2023-10-18T16:27:39Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "Good point. Added.",
+              "createdAt": "2023-10-18T16:36:50Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "I was wrapping lines at 70 lines at time because we need to copy it into the draft. I can start wrapping at 80 lines in the reference implementation. ",
+              "createdAt": "2023-10-18T16:38:19Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 2,
+              "body": "Sounds right. Let's use `EPSILON` and `DELTA` in docstring. We can even update it if we end up using Greek letters.",
+              "createdAt": "2023-10-18T16:42:05Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Right. I added more comments here.",
+              "createdAt": "2023-10-18T17:05:14Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "I changed it to \"target `batch_size` number of honest Clients\".",
+              "createdAt": "2023-10-18T17:05:14Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "Ok. I will keep it as debiasing for now.",
+              "createdAt": "2023-10-18T17:05:14Z",
+              "updatedAt": "2023-10-18T17:31:25Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "Good point. Let's remove it for now. And added a note in the file header in `multi_hot_histogram_with_client_dp.py`.",
+              "createdAt": "2023-10-18T17:06:55Z",
+              "updatedAt": "2023-10-18T17:31:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5keh9J",
+          "commit": {
+            "abbreviatedOid": "1a8d839"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-18T17:34:45Z",
+          "updatedAt": "2023-10-18T17:34:45Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Explained `dimension`, and removed `num_reps` (only applicable to Aggregator compensation I realized, so removed it for simplicity).",
+              "createdAt": "2023-10-18T17:34:45Z",
+              "updatedAt": "2023-10-18T17:34:45Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOJ7sZWc5dANLO",
+      "title": "Clean up text for Client-DP",
+      "url": "https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/22",
+      "state": "OPEN",
+      "author": "junyechen1996",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Specify randomized response sampler and specify how to instantiate Prio3MultiHotHistogram with the maximum number of 1s",
+      "createdAt": "2023-10-17T11:08:03Z",
+      "updatedAt": "2023-10-18T20:17:27Z",
+      "baseRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "3d401e96c7e8beb127102a6ff6cadf6cb08ef213",
+      "headRepository": "wangshan/draft-wang-ppm-differential-privacy",
+      "headRefName": "junyec/histogram-client-dp",
+      "headRefOid": "131939d3e845675b7ce973121e7801176053b383",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Reviewer's note: stacked PR on #21 ",
+          "createdAt": "2023-10-17T11:08:35Z",
+          "updatedAt": "2023-10-17T11:08:35Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ7sZWc5kXMIi",
+          "commit": {
+            "abbreviatedOid": "cecae5b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "My review focuses mainly on the structure of the text, I am not able to review the actual mechanism in detail. Please lean on @wangshan for review here.\r\n\r\nOverall I think this is in good shape. My main suggestion is to avoid using terminology that is not defined. For example the notions of \"central DP\" and \"local DP\" are used in this PR, but they haven't been defined. First, check if there is other terminology you can use instead; if not, please add it {{overview}}.",
+          "createdAt": "2023-10-18T02:27:37Z",
+          "updatedAt": "2023-10-18T02:47:24Z",
+          "comments": [
+            {
+              "originalPosition": 73,
+              "body": "Be specific (\"approximate-DP\" is more meaningful than \"DP guarantee\" because we defined it previously) and specify the trust model.\r\n```suggestion\r\ngood approximate-DP in the OAMC trust model. It is the same as the one specified in\r\n```",
+              "createdAt": "2023-10-18T02:27:37Z",
+              "updatedAt": "2023-10-18T02:47:24Z"
+            },
+            {
+              "originalPosition": 77,
+              "body": "We need a paragraph before this describing what type of data the mechanism is compatible with. Giving an illustrative example would help to.",
+              "createdAt": "2023-10-18T02:29:04Z",
+              "updatedAt": "2023-10-18T02:47:24Z"
+            },
+            {
+              "originalPosition": 80,
+              "body": "1. If you say the words \"DP guarantee\", then you probably aren't being clear enough. Do you mean that we get `EPSILON_0`-DP in the OC trust model?\r\n2. In the appendix we say that DAP is not compatible with deletion-DP. Indeed, the way we define neighboring databases in the section above rules this out.",
+              "createdAt": "2023-10-18T02:33:10Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 82,
+              "body": "\"which ensures that it is impossible...\" What's the goal for this text?",
+              "createdAt": "2023-10-18T02:33:59Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 86,
+              "body": "```suggestion\r\ndebiasing operations involve floating point arithmetic.\r\n```",
+              "createdAt": "2023-10-18T02:34:15Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "CLT is probably folklore enough (\"folklore\" == \"well-known enough to not require a citation\") but we should probably state it for the reader in the conventions section of this draft, at least informally. (Similar to how we handle `e`.)",
+              "createdAt": "2023-10-18T02:35:50Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 154,
+              "body": "\"central DP guarantee\" is not meaningful unless we define it.",
+              "createdAt": "2023-10-18T02:38:08Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 323,
+              "body": "```suggestion\r\nand another which uses only an Aggregator-DP mechanism and targets the more\r\n```",
+              "createdAt": "2023-10-18T02:40:07Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 324,
+              "body": "```suggestion\r\nstringent OAOC trust model. We will then compare the utility of both policies\r\n```",
+              "createdAt": "2023-10-18T02:40:25Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            },
+            {
+              "originalPosition": 331,
+              "body": "This TODO looks to be out-of-date.",
+              "createdAt": "2023-10-18T02:41:11Z",
+              "updatedAt": "2023-10-18T02:47:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kcRL6",
+          "commit": {
+            "abbreviatedOid": "cecae5b"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-18T13:45:38Z",
+          "updatedAt": "2023-10-18T13:45:38Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "for 1. I think it's ok to see EPSILON_0-DP guarantee, since this is client level DP noise, it doesn't really to do with the DP guarantee for the whole aggregation, which then relates to the trust models.",
+              "createdAt": "2023-10-18T13:45:38Z",
+              "updatedAt": "2023-10-18T13:45:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kcZeP",
+          "commit": {
+            "abbreviatedOid": "cecae5b"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-18T13:56:51Z",
+          "updatedAt": "2023-10-18T13:56:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kfDPc",
+          "commit": {
+            "abbreviatedOid": "cecae5b"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I believe the open discussions are mostly on the explanation for binary randomized response: specifically:\r\n\r\n- Describe randomized response's input: https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/22/files#r1363033006\r\n- Clarification about `EPSILON_0`-DP in deletion-DP model, and connection with `(EPSILON, DELTA)`-DP in replacement-DP model, which is the only model in DAP.\r\n\r\nI reworked the text in both.",
+          "createdAt": "2023-10-18T18:47:03Z",
+          "updatedAt": "2023-10-18T19:19:19Z",
+          "comments": [
+            {
+              "originalPosition": 73,
+              "body": "It actually is `EPSILON_0`-DP, but I removed \"DP guarantee\", and say it is `EPSILON_0`-DP in the deletion-DP model.",
+              "createdAt": "2023-10-18T18:47:03Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            },
+            {
+              "originalPosition": 77,
+              "body": "I added a paragraph, and reworked the explanation here. Please take a look again.",
+              "createdAt": "2023-10-18T18:47:22Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            },
+            {
+              "originalPosition": 80,
+              "body": "So it's correct binary randomized response only provides `EPSILON_0`-DP in deletion-DP at Client level, but by aggregating a batch of one-hot vectors noised with binary randomized response at all coordinates, we get `(EPSILON, DELTA)`-DP in the replacement DP model. I reworked this paragraph a bit. Let me know if it makes sense more.",
+              "createdAt": "2023-10-18T18:56:15Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            },
+            {
+              "originalPosition": 82,
+              "body": "Removed it.",
+              "createdAt": "2023-10-18T18:56:20Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "Sounds good. I added a text about CLT in Conventions.",
+              "createdAt": "2023-10-18T18:56:35Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            },
+            {
+              "originalPosition": 154,
+              "body": "Removed this change.",
+              "createdAt": "2023-10-18T18:57:13Z",
+              "updatedAt": "2023-10-18T19:19:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ7sZWc5kfxAQ",
+          "commit": {
+            "abbreviatedOid": "131939d"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "A few more text flow comments, should be easy enough to resolve.",
+          "createdAt": "2023-10-18T20:06:31Z",
+          "updatedAt": "2023-10-18T20:17:27Z",
+          "comments": [
+            {
+              "originalPosition": 56,
+              "body": "\"replacement-DP\" is defined below (in the appendix) but not above.  If you want to use the term, make sure it's defined before reader gets here. (I don't think it's strictly necessary, since we defined DP in terms of replacement already.)",
+              "createdAt": "2023-10-18T20:06:31Z",
+              "updatedAt": "2023-10-18T20:17:27Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "A single bit or a bit vector? I still think an illustrative example would be helpful. (What type of data might be noising? Perhaps describe the histogram use case?)",
+              "createdAt": "2023-10-18T20:07:01Z",
+              "updatedAt": "2023-10-18T20:17:27Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "(Follow up on https://github.com/wangshan/draft-wang-ppm-differential-privacy/pull/22#discussion_r1364371532) This looks fine except \"Client level\" is not defined. What about \"in the OC trust model\"?\r\n\r\nAlso, we should define deletion-DP informally here so that the reader doesn't need to look this up.\r\n\r\n```suggestion\r\nThe binary randomized response mechanism specified in Appendix C.1 of\r\n{{MJTB+22}} is `EPSILON_0`-DP at the OC trust model, in the deletion-DP model\r\n(Definition II.4 of {{EFMR+20}}).\r\n```",
+              "createdAt": "2023-10-18T20:14:49Z",
+              "updatedAt": "2023-10-18T20:17:27Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "This isn't suitable as an intro paragraph. I suggest moving it below the paragraph that mentions approximate DP and OAMC trust model.",
+              "createdAt": "2023-10-18T20:16:30Z",
+              "updatedAt": "2023-10-18T20:17:27Z"
+            }
+          ]
         }
       ]
     }
