@@ -924,7 +924,9 @@ Table of Contents
    lose some utility because each Aggregator is independently adding
    noise.  The standard deviation in the aggregate result thus becomes
    SIGMA * sqrt(c), where c is the number of honest Aggregators.  In the
-   table below, we will assume c = 2 in the "Standard deviation" column.
+   table below, the numbers in "Standard deviation" column assume c = 2.
+   The numbers in "Standard deviation (OAOC)" column assume only one
+   Aggregator is honest.
 
    +=========+=======+====================+===========================+
    | EPSILON | DELTA | Standard deviation | Standard deviation (OAOC) |
@@ -936,7 +938,7 @@ Table of Contents
    | 1.528   | 1e-9  | 7.3403             | 5.1904                    |
    +---------+-------+--------------------+---------------------------+
 
-        Table 2: Utility of Pure Client-DP for histogram use case.
+      Table 2: Utility of Pure Aggregator-DP for histogram use case.
 
 6.1.3.  Conclusion
 

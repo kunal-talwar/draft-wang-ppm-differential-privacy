@@ -2230,13 +2230,14 @@ combinations of <code>(EPSILON, DELTA)</code>-DP, based on the open-sourced code
 <p id="section-6.1.2.3-2">It's worth noting that if more than one Aggregator is honest, we will lose some
 utility because each Aggregator is independently adding noise. The standard
 deviation in the aggregate result thus becomes <code>SIGMA * sqrt(c)</code>, where <code>c</code> is
-the number of honest Aggregators. In the table below, we will assume <code>c = 2</code> in
-the "Standard deviation" column.<a href="#section-6.1.2.3-2" class="pilcrow">¶</a></p>
-<span id="name-utility-of-pure-client-dp-fo"></span><div id="histogram-aggregator-dp">
+the number of honest Aggregators. In the table below, the numbers in
+"Standard deviation" column assume <code>c = 2</code>. The numbers in
+"Standard deviation (OAOC)" column assume only one Aggregator is honest.<a href="#section-6.1.2.3-2" class="pilcrow">¶</a></p>
+<span id="name-utility-of-pure-aggregator-"></span><div id="histogram-aggregator-dp">
 <table class="center" id="table-2">
               <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-utility-of-pure-client-dp-fo" class="selfRef">Utility of Pure Client-DP for histogram use case.</a>
+<a href="#name-utility-of-pure-aggregator-" class="selfRef">Utility of Pure Aggregator-DP for histogram use case.</a>
               </caption>
 <thead>
                 <tr>
