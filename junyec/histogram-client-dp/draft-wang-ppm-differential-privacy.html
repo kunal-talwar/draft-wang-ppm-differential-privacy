@@ -1641,9 +1641,9 @@ class DpMechanism:
         <h3 id="name-binary-randomized-response">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-binary-randomized-response" class="section-name selfRef">Binary Randomized Response</a>
         </h3>
-<p id="section-4.3-1">The binary randomized response mechanism specified in Appendix C.1 of
-<span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span> is initialized with a parameter <code>EPSILON_0</code>, and takes in a single
-bit <code>x</code>. The bit is flipped to <code>1 - x</code> with probability
+<p id="section-4.3-1">This section describes the binary randomized response mechanism, specified in
+Appendix C.1 of <span>[<a href="#MJTB_22" class="cite xref">MJTB_22</a>]</span>. It is initialized with a parameter <code>EPSILON_0</code>,
+and takes in a single bit <code>x</code>. The bit is flipped to <code>1 - x</code> with probability
 <code>1 / (exp(EPSILON_0) + 1)</code>. For example, if <code>EPSILON_0</code> is configured to be 3,
 and the input to binary randomized response is a 0, the bit will be flipped to
 be 1 with probability <code>1 / (exp(3) + 1)</code>, otherwise, it will stay as a 0.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
