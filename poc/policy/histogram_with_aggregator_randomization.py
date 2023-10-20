@@ -35,7 +35,7 @@ from discrete_gaussian import DiscreteGaussianWithZeroMean
 from policy import DpPolicy
 
 
-class HistogramWithAggregatorDp(DpPolicy):
+class HistogramWithAggregatorRandomization(DpPolicy):
     Field = Histogram.Field
     # A measurement is an unsigned integer, indicating an index
     # less than `Histogram.length`.
@@ -85,7 +85,7 @@ def test():
     # DP policy with Aggregator-DP only.
     # Expect this to fail before `DiscreteGaussianWithZeroMean` is fully
     # implemented.
-    histogram_with_dp = HistogramWithAggregatorDp(0.03, 1e-9)
+    histogram_with_dp = HistogramWithAggregatorRandomization(0.03, 1e-9)
 
     dimension = 50
     # Prio3Histogram VDAF with length = dimension, and chunk_length = 10.
