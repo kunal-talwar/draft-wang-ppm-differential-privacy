@@ -29,9 +29,17 @@ author:
     organization: Apple Inc.
     email: "junyec@apple.com"
  -
+    fullname: Audra McMillan
+    organization: Apple Inc.
+    email: "audra_mcmillan@apple.com"
+ -
     fullname: Christopher Patton
     organization: Cloudflare
     email: "chrispatton+ietf@gmail.com"
+ -
+    fullname: Kunal Talwar
+    organization: Apple Inc.
+    email: "ktalwar@apple.com"
  -
     fullname: Shan Wang
     organization: Apple Inc.
